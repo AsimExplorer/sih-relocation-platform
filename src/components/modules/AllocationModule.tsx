@@ -41,28 +41,50 @@ export const AllocationModule: React.FC<AllocationModuleProps> = ({
             <Share2 className="w-4 h-4 text-emerald-700" />
             Candidate Sector Capacity Saturation Ledger (Shared Resource Monitoring)
           </span>
-          <span className="text-[11px] text-slate-500 font-normal">Total Available: 2,450 HH | Total Assigned: 2,448 HH</span>
+          <span className="text-[11px] text-slate-500 font-normal">
+            Total Usable Capacity: {candidateSites.filter(s => s.status !== 'REJECTED').reduce((acc, s) => acc + s.calculatedCapacity.netSafeAbsorptionCapacityHH, 0)} HH | Total Relocation Demand: {settlements.reduce((acc, s) => acc + s.households, 0)} HH
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
           {candidateSites.map(site => {
+            const isRejected = site.status === 'REJECTED';
             const util = solverResult.siteUtilization[site.id] || {
-              capacityHH: site.calculatedCapacity.netSafeAbsorptionCapacityHH,
+              capacityHH: isRejected ? 0 : site.calculatedCapacity.netSafeAbsorptionCapacityHH,
               assignedHH: 0,
-              remainingHH: site.calculatedCapacity.netSafeAbsorptionCapacityHH,
+              remainingHH: isRejected ? 0 : site.calculatedCapacity.netSafeAbsorptionCapacityHH,
               utilizationPct: 0
             };
             return (
-              <div key={site.id} className="p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-2">
+              <div 
+                key={site.id} 
+                className={`p-3 rounded-lg border space-y-2 ${
+                  isRejected ? 'bg-red-50/40 border-red-200' : 'bg-slate-50 border-slate-200'
+                }`}
+              >
                 <div className="flex justify-between items-start text-xs font-bold text-slate-900">
                   <span className="truncate">{site.name.split('—')[0]}</span>
-                  <span className="font-mono text-emerald-700">{util.remainingHH} HH Left</span>
+                  {isRejected ? (
+                    <span className="font-mono text-red-700 text-[10px] uppercase font-black px-1 rounded bg-red-100">
+                      REJECTED
+                    </span>
+                  ) : (
+                    <span className="font-mono text-emerald-700">{util.remainingHH} HH Left</span>
+                  )}
                 </div>
-                <CapacityMeter
-                  utilized={util.assignedHH}
-                  total={util.capacityHH}
-                  limitingConstraint={site.calculatedCapacity.bindingConstraint}
-                />
+                {isRejected ? (
+                  <div className="text-[10px] text-red-800 space-y-1">
+                    <div className="font-semibold">Zero Allocation Assigned</div>
+                    <div className="text-slate-500">Limiting: {site.calculatedCapacity.bindingConstraint}</div>
+                  </div>
+                ) : (
+                  <CapacityMeter
+                    utilized={util.assignedHH}
+                    total={util.capacityHH}
+                    limitingConstraint={site.calculatedCapacity.bindingConstraint}
+                    status={site.status}
+                  />
+                )}
               </div>
             );
           })}

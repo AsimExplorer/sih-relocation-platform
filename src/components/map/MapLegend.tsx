@@ -44,7 +44,7 @@ export const MapLegend: React.FC<MapLegendProps> = ({ layers, onToggleLayer }) =
             <label className="flex items-center justify-between text-slate-700 hover:text-slate-950 cursor-pointer select-none">
               <span className="flex items-center gap-2">
                 <span className="w-3.5 h-3.5 rounded bg-emerald-100 border-2 border-emerald-600 inline-block shrink-0" />
-                Candidate Relocation Parcels
+                Candidate Parcels (Feasible vs Rej)
               </span>
               <input 
                 type="checkbox" 

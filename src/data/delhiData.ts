@@ -1,12 +1,12 @@
-import { Settlement, CandidateSite, RedZoneVersionData } from '../types';
+import { Settlement, CandidateSite, RedZoneVersionData, DataConfidenceInfo, ValidationCheck } from '../types';
 
 /**
- * EAST DELHI / DELHI NCR RELOCATION DECISION SUPPORT DATASET
- * Focus area: East Delhi District (Preet Vihar, Gandhi Nagar, Mayur Vihar) & USAR Surajmal Vihar Corridor
- * Scenario: Post-July 2023 Yamuna Flood Inundation & NGT Riverbed Protection Zone Resettlement
+ * SURAKSHA DISASTER RELOCATION DECISION-SUPPORT PLATFORM
+ * Operational Jurisdiction: East Delhi & Trans-Yamuna District (DDMA / Govt of NCT of Delhi)
+ * Reference Anchor: University School of Automation and Robotics (USAR), GGSIPU East Delhi Campus, Surajmal Vihar / Karkardooma / Yamuna Floodplain Basin
  */
 
-export const DELHI_CENTER: [number, number] = [28.6538, 77.3015]; // Centered near USAR (University School of Automation and Robotics, Surajmal Vihar)
+export const DELHI_CENTER: [number, number] = [28.6538, 77.3015];
 export const DELHI_BOUNDS = {
   minLat: 28.580,
   maxLat: 28.740,
@@ -32,7 +32,7 @@ export const SETTLEMENTS_DATA: Settlement[] = [
     redZoneOverlapPct: 100,
     riskScore: 96,
     priority: 'Immediate',
-    recommendedAction: 'Mandatory Permanent Relocation & Riverbed Khadar De-notification',
+    recommendedAction: 'Mandatory Permanent Relocation & Riverbed Khadar De-notification under DM Act Sec 30(2)',
     historicalDisasters: [
       { year: 2023, eventType: 'Record 208.66m Yamuna Peak Inundation', fatalities: 7, damageDesc: 'Submerged 620 dwellings under 3.8m floodwaters; Ring Road regulator breached' },
       { year: 2019, eventType: 'Monsoon High Spillway Surge (8.28 Lakh Cusecs)', fatalities: 2, damageDesc: 'Complete agricultural and shelter loss; 14-day mandatory evacuation' },
@@ -44,6 +44,20 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       'High Silt Liquefaction and Embankment Scouring Index',
       'Recurrent Submersion (>14 days) during every major Hathnikund spillway release'
     ],
+    riskBreakdown: {
+      floodInundationRisk: 98,
+      siltLiquefactionRisk: 94,
+      drainageBackflowRisk: 92,
+      populationVulnerability: 96,
+      historicalDisasterRecurrence: 98,
+      accessibilityImpedance: 94
+    },
+    keyRiskDrivers: [
+      'Record 2023 flood overtopping (208.66m MSL) submerging dwellings under 3.8m floodwaters',
+      'Location inside statutory NGT Riverbed "O" Zone with zero physical flood protection bunding',
+      'Saturated sandy-silt foundation prone to total structural scouring and liquefaction',
+      'Single emergency evacuation corridor via railway bridge underpass prone to immediate waterlogging'
+    ],
     factors: {
       hazardRecurrence: 98,
       redZoneOverlap: 100,
@@ -52,11 +66,11 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       slopeInstability: 96
     },
     explanation: {
-      summary: 'Ranked #1 Priority for immediate permanent relocation due to triple catastrophic flood recurrence, 100% location inside statutory NGT Riverbed "O" Zone, and absence of physical flood protection bunding.',
+      summary: 'Ranked #1 Priority for immediate permanent relocation due to triple catastrophic flood recurrence, 100% location inside statutory NGT Riverbed "O" Zone, and total absence of flood bunding.',
       keyPoints: [
-        'Central Water Commission (CWC) hydrological data confirms water level crossed 208.66m in July 2023, completely submerging the entire habitation.',
-        'National Green Tribunal (NGT) Principal Bench orders prohibit any permanent structures within active Yamuna floodplains.',
-        'Emergency evacuation requires boat rescue across active river currents during peak monsoon.'
+        'Central Water Commission (CWC) telemetry confirms river level exceeded 208.66m in July 2023, overtopping entire habitation by 3.8m.',
+        'National Green Tribunal (NGT) Principal Bench orders strictly prohibit any permanent human settlement within active Yamuna floodplains.',
+        'Evacuation requires boat rescue across high-velocity mainstem currents during peak monsoon.'
       ],
       statutoryJustification: 'Mandated under Section 30(2)(v) of Disaster Management Act 2005 read with NGT River Yamuna Preservation Orders.'
     }
@@ -89,6 +103,20 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       'High Population Density in 50-Year Flood Envelope',
       'Absence of Regulated Stormwater Outfalls'
     ],
+    riskBreakdown: {
+      floodInundationRisk: 94,
+      siltLiquefactionRisk: 90,
+      drainageBackflowRisk: 88,
+      populationVulnerability: 92,
+      historicalDisasterRecurrence: 92,
+      accessibilityImpedance: 89
+    },
+    keyRiskDrivers: [
+      'Direct unbunded exposure to high-velocity flood runoff across Hathnikund spillway surges',
+      'Marshy swale topography trapping stagnant floodwaters for over 9 consecutive days',
+      'High population density (2,940 residents) in non-engineered semi-pucca dwellings',
+      'Access road severed during monsoon alerts, isolating community from medical aid'
+    ],
     factors: {
       hazardRecurrence: 92,
       redZoneOverlap: 94,
@@ -99,11 +127,11 @@ export const SETTLEMENTS_DATA: Settlement[] = [
     explanation: {
       summary: 'Ranked #2 Priority due to direct unbunded exposure to high-velocity flood runoff. 94% of the built-up cluster lies within the statutory Red Zone.',
       keyPoints: [
-        'Riverbed silt deposition has elevated surrounding ground, causing ponding during normal rains.',
-        'Dense population (2,940 residents) creates severe humanitarian exposure during sudden nighttime barrage water releases.',
+        'Riverbed silt deposition has elevated surrounding ground, causing permanent ponding during normal rains.',
+        'Dense population (2,940 residents) creates severe humanitarian exposure during nighttime barrage water releases.',
         'Zero motorable access during monsoon alerts.'
       ],
-      statutoryJustification: 'Designated for habitational de-densification under Delhi Disaster Management Plan.'
+      statutoryJustification: 'Designated for habitational de-densification under Delhi Disaster Management Authority Plan.'
     }
   },
   {
@@ -133,6 +161,20 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       'Lowland Depression below Embankment Crown',
       'Unstable Sandy Loam Foundations Prone to Siphon Collapse'
     ],
+    riskBreakdown: {
+      floodInundationRisk: 90,
+      siltLiquefactionRisk: 86,
+      drainageBackflowRisk: 96,
+      populationVulnerability: 84,
+      historicalDisasterRecurrence: 86,
+      accessibilityImpedance: 91
+    },
+    keyRiskDrivers: [
+      'Critical drainage siphon backflow: floodwaters enter settlement through city stormwater regulators',
+      'Lowland depression topography 2.4m below surrounding embankment crown',
+      'Shallow groundwater table (0.5m) causing sewage backflow and severe groundwater contamination',
+      'Narrow earthen approach embankment prone to washouts during flash surges'
+    ],
     factors: {
       hazardRecurrence: 86,
       redZoneOverlap: 88,
@@ -141,11 +183,11 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       slopeInstability: 89
     },
     explanation: {
-      summary: 'Ranked #3 Priority. While smaller in population (1,820), the settlement sits directly in the drainage depression where stormwater backflows when river levels rise.',
+      summary: 'Ranked #3 Priority. Sits directly in the drainage depression where stormwater backflows instantaneously when river levels rise.',
       keyPoints: [
         'Drainage culvert gates under Shastri Park road failed in July 2023, causing instantaneous inundation.',
-        'Groundwater table stands at 0.5m during monsoon, preventing soakage and creating severe contamination.',
-        'Access via narrow earthen embankment road prone to washouts.'
+        'Groundwater table stands at 0.5m during monsoon, preventing soakage and creating severe epidemic hazard.',
+        'Access via single narrow earthen embankment road.'
       ],
       statutoryJustification: 'Classified under Delhi Master Plan (MPD-2041) as Non-Habitable River Buffer Zone.'
     }
@@ -176,6 +218,20 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       'High Silt Liquefaction and Foundation Scour Vulnerability',
       'Partial Protection from Embankment Bund'
     ],
+    riskBreakdown: {
+      floodInundationRisk: 76,
+      siltLiquefactionRisk: 74,
+      drainageBackflowRisk: 80,
+      populationVulnerability: 78,
+      historicalDisasterRecurrence: 72,
+      accessibilityImpedance: 70
+    },
+    keyRiskDrivers: [
+      'Canal confluence overflow during simultaneous rainfall and river swell',
+      'Alluvial silt liquefaction under foundation footings',
+      'Dense settlement layout preventing internal emergency vehicular movement',
+      'Power and water distribution infrastructure located in flood-prone basements'
+    ],
     factors: {
       hazardRecurrence: 72,
       redZoneOverlap: 72,
@@ -184,11 +240,11 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       slopeInstability: 70
     },
     explanation: {
-      summary: 'Ranked #4 (Short-Term). 72% within Red Zone. Suffers severe drainage congestion and canal overspill, but protected on northern perimeter by ring road embankment.',
+      summary: 'Ranked #4 (Short-Term). 72% within Red Zone. Suffers drainage congestion, but northern flank is shielded by ring road embankment.',
       keyPoints: [
-        'Secondary flood impact from stormwater backup rather than direct river current.',
+        'Secondary flood impact from stormwater backup rather than direct mainstem river velocity.',
         'Enables structured 6-month planned transition to nearby candidate sites.',
-        'Requires monsoon telemetry monitoring until resettlement is executed.'
+        'Requires monsoon telemetry monitoring until resettlement is finalized.'
       ],
       statutoryJustification: 'Designated as Tier-2 Relocation Habitation under Delhi Flood Mitigation Strategy.'
     }
@@ -219,6 +275,20 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       'Backwater Seepage into Low-Lying Farm Pockets',
       'Moderate Silt Stability'
     ],
+    riskBreakdown: {
+      floodInundationRisk: 58,
+      siltLiquefactionRisk: 52,
+      drainageBackflowRisk: 64,
+      populationVulnerability: 62,
+      historicalDisasterRecurrence: 54,
+      accessibilityImpedance: 76
+    },
+    keyRiskDrivers: [
+      'Low perimeter earthen bund susceptible to overtopping during rare super-surges (>8.5 lakh cusecs)',
+      'Agricultural drainage ditches backflowing into farm dwellings',
+      'Moderate distance from primary emergency hospitals (7.5 km)',
+      'Paved road access remains passable up to 206.5m MSL'
+    ],
     factors: {
       hazardRecurrence: 54,
       redZoneOverlap: 45,
@@ -227,9 +297,9 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       slopeInstability: 58
     },
     explanation: {
-      summary: 'Ranked #5 (Medium-Term). Only 45% falls within the conservative Red Zone boundary. Primary risk is bund overtopping during rare super-floods.',
+      summary: 'Ranked #5 (Medium-Term). Only 45% falls within the conservative Red Zone boundary. Primary risk is agricultural loss and isolation during rare super-floods.',
       keyPoints: [
-        'Predominantly an isolation and agricultural loss risk rather than structural habitat erasure.',
+        'Predominantly an isolation and agricultural hazard rather than immediate structural habitat erasure.',
         'Eligible for prioritized PWD bund reinforcement in Phase 1 and voluntary relocation in Phase 2.',
         'Ordered multi-year transition feasible.'
       ],
@@ -257,11 +327,14 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       'SET-05': 8.5,
     },
     suitabilityScore: 88,
+    status: 'FEASIBLE',
+    statusReason: 'High-suitability institutional sector with direct Vikas Marg / Metro access; safe absorption is capped at 620 households due to DJB Bhagirathi WTP bulk water pipeline allocation.',
     suitabilityFactors: {
       hazardSafety: 98,
       buildableSlope: 96,
       roadConnectivity: 94,
       waterProximity: 68,
+      sanitationAccess: 88,
       healthcareAccess: 92,
       schoolAccess: 90,
       landTenure: 91
@@ -272,6 +345,10 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       internalInfraOverheadPct: 35,
       waterSustainableYieldLitersPerDay: 334800, // DJB Bhagirathi WTP bulk pipeline allocation
       waterLpcdStandard: 135,
+      sanitationFacilityName: 'Yamuna Vihar 25 MGD STP (Trunk Sewer-4 Connection)',
+      sanitationDailyTreatmentCapacityLiters: 380000,
+      sanitationCapacityHH: 790,
+      sanitationUtilizationPct: 68,
       roadWidthMeters: 14.0, // Multi-lane Vikas Marg / CBD Ground Corridor
       roadHourlyPcuCapacity: 1400,
       healthcareFacilityName: 'Dr. Hedgewar Arogya Sansthan Karkardooma (1.8 km)',
@@ -284,6 +361,7 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
     calculatedCapacity: {
       landCapacityHH: 820,
       waterCapacityHH: 620, // BINDING CONSTRAINT!
+      sanitationCapacityHH: 790,
       roadCapacityHH: 850,
       healthCapacityHH: 740,
       schoolCapacityHH: 710,
@@ -320,11 +398,14 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       'SET-05': 6.8,
     },
     suitabilityScore: 84,
+    status: 'FEASIBLE',
+    statusReason: 'Large buildable land area (950 HH); safe capacity governed by 7.0m PWD approach overbridge bottleneck capping emergency evacuation clearance to 780 HH.',
     suitabilityFactors: {
       hazardSafety: 96,
       buildableSlope: 94,
       roadConnectivity: 66,
       waterProximity: 88,
+      sanitationAccess: 86,
       healthcareAccess: 80,
       schoolAccess: 86,
       landTenure: 92
@@ -335,6 +416,10 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       internalInfraOverheadPct: 35,
       waterSustainableYieldLitersPerDay: 475200,
       waterLpcdStandard: 135,
+      sanitationFacilityName: 'Kondli Phase-IV 45 MGD Modern STP & Northern Outfall',
+      sanitationDailyTreatmentCapacityLiters: 420000,
+      sanitationCapacityHH: 860,
+      sanitationUtilizationPct: 72,
       roadWidthMeters: 7.0, // Intermediate bridge bottleneck over railway corridor
       roadHourlyPcuCapacity: 800,
       healthcareFacilityName: 'Guru Teg Bahadur (GTB) Hospital Dilshad Garden (3.5 km)',
@@ -347,6 +432,7 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
     calculatedCapacity: {
       landCapacityHH: 950,
       waterCapacityHH: 880,
+      sanitationCapacityHH: 860,
       roadCapacityHH: 780, // BINDING CONSTRAINT!
       healthCapacityHH: 820,
       schoolCapacityHH: 850,
@@ -383,11 +469,14 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       'SET-05': 10.2,
     },
     suitabilityScore: 79,
+    status: 'LIMITED',
+    statusReason: 'LIMITED: Prime connectivity and water availability, but educational infrastructure can absorb a maximum of 490 households before UDISE+ student-teacher ratios are breached.',
     suitabilityFactors: {
       hazardSafety: 95,
       buildableSlope: 92,
       roadConnectivity: 89,
       waterProximity: 82,
+      sanitationAccess: 84,
       healthcareAccess: 78,
       schoolAccess: 61,
       landTenure: 85
@@ -398,6 +487,10 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       internalInfraOverheadPct: 35,
       waterSustainableYieldLitersPerDay: 345600,
       waterLpcdStandard: 135,
+      sanitationFacilityName: 'Ghazipur Bio-Digester STP Outfall (DJB Trunk Sewer)',
+      sanitationDailyTreatmentCapacityLiters: 310000,
+      sanitationCapacityHH: 640,
+      sanitationUtilizationPct: 74,
       roadWidthMeters: 12.0,
       roadHourlyPcuCapacity: 1100,
       healthcareFacilityName: 'Lal Bahadur Shastri (LBS) Hospital Khichripur (3.2 km)',
@@ -410,6 +503,7 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
     calculatedCapacity: {
       landCapacityHH: 680,
       waterCapacityHH: 640,
+      sanitationCapacityHH: 640,
       roadCapacityHH: 610,
       healthCapacityHH: 650,
       schoolCapacityHH: 490, // BINDING CONSTRAINT!
@@ -446,11 +540,14 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       'SET-05': 11.0,
     },
     suitabilityScore: 82,
+    status: 'LIMITED',
+    statusReason: 'LIMITED: Safe absorption capped at 560 households due to primary health centre roster and hospital bed capacity thresholds under National Health Mission norms.',
     suitabilityFactors: {
       hazardSafety: 97,
       buildableSlope: 95,
       roadConnectivity: 88,
       waterProximity: 82,
+      sanitationAccess: 85,
       healthcareAccess: 67,
       schoolAccess: 87,
       landTenure: 93
@@ -461,6 +558,10 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       internalInfraOverheadPct: 35,
       waterSustainableYieldLitersPerDay: 367200,
       waterLpcdStandard: 135,
+      sanitationFacilityName: 'Nilothi / Bakkarwala Decentralized Packaged STP',
+      sanitationDailyTreatmentCapacityLiters: 340000,
+      sanitationCapacityHH: 700,
+      sanitationUtilizationPct: 71,
       roadWidthMeters: 11.0,
       roadHourlyPcuCapacity: 1150,
       healthcareFacilityName: 'Civil Hospital / Primary Health Centre Hub (4.5 km)',
@@ -473,6 +574,7 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
     calculatedCapacity: {
       landCapacityHH: 720,
       waterCapacityHH: 680,
+      sanitationCapacityHH: 700,
       roadCapacityHH: 650,
       healthCapacityHH: 560, // BINDING CONSTRAINT!
       schoolCapacityHH: 670,
@@ -489,6 +591,78 @@ export const CANDIDATE_SITES_DATA: CandidateSite[] = [
       [28.6710, 77.3380],
       [28.6630, 77.3390],
       [28.6610, 77.3270]
+    ]
+  },
+  {
+    id: 'SITE-05',
+    name: 'Site Epsilon — Geeta Colony Lowland Fringe / Okhla Riverbed Buffer',
+    locationName: 'Geeta Colony Ring Road Embankment Swale (Trans-Yamuna South Sector)',
+    panchayat: 'Preet Vihar Sub-Division, East Delhi',
+    lat: 28.6500,
+    lng: 77.2680,
+    areaHectares: 18.0,
+    meanSlopeDegrees: 0.7,
+    elevationMeters: 206,
+    distanceToSettlements: {
+      'SET-01': 2.4,
+      'SET-02': 4.5,
+      'SET-03': 2.1,
+      'SET-04': 3.8,
+      'SET-05': 7.2,
+    },
+    suitabilityScore: 42,
+    status: 'REJECTED',
+    statusReason: 'REJECTED: Severe sewage infrastructure overload (134% capacity saturation) and parcel proximity to 50-year secondary hydraulic backwater envelope renders this site legally and ecologically non-viable for permanent human habitation.',
+    rejectionReason: 'Critical deficit in trunk sewer intake (capping absorption at only 140 HH) and 100-year backwater swell risks violate NGT riverbed protection standards.',
+    suitabilityFactors: {
+      hazardSafety: 38,
+      buildableSlope: 75,
+      roadConnectivity: 62,
+      waterProximity: 55,
+      sanitationAccess: 22,
+      healthcareAccess: 48,
+      schoolAccess: 45,
+      landTenure: 40
+    },
+    rawConstraints: {
+      buildableLandAreaSqMeters: 90000,
+      minPlotAreaSqMetersPerHH: 160,
+      internalInfraOverheadPct: 35,
+      waterSustainableYieldLitersPerDay: 180000,
+      waterLpcdStandard: 135,
+      sanitationFacilityName: 'Geeta Colony Local Outfall (Sewer Trunk Overloaded by 134%)',
+      sanitationDailyTreatmentCapacityLiters: 60000,
+      sanitationCapacityHH: 140, // BINDING BOTTLENECK!
+      sanitationUtilizationPct: 98,
+      roadWidthMeters: 5.5,
+      roadHourlyPcuCapacity: 450,
+      healthcareFacilityName: 'Dispensary Sub-Centre Geeta Colony (2.8 km)',
+      healthcareAvailableBedCapacityHH: 210,
+      schoolName: 'Govt Primary School Geeta Colony',
+      schoolAvailableSeatCapacityHH: 190,
+      existingHostPopulationHH: 80,
+      hazardBufferDeductionPct: 35, // High deduction due to riverbed proximity
+    },
+    calculatedCapacity: {
+      landCapacityHH: 360,
+      waterCapacityHH: 330,
+      sanitationCapacityHH: 140, // BINDING BOTTLENECK!
+      roadCapacityHH: 240,
+      healthCapacityHH: 210,
+      schoolCapacityHH: 190,
+      netSafeAbsorptionCapacityHH: 140,
+      netSafePopulationCapacity: 560,
+      bindingConstraint: 'Sanitation & Wastewater Treatment',
+      bindingConstraintExplanation: 'Existing trunk sewer outfall is operating at 134% overload. Local STP headroom permits maximum of 140 households before raw untreated effluent discharges into Yamuna riverbed swale in direct violation of NGT orders.',
+      limitingBottleneckValue: '140 HH STP capacity limit',
+      limitingBottleneckRequired: '500+ HH required for viable relocation cluster'
+    },
+    boundaryGeoJson: [
+      [28.6460, 77.2640],
+      [28.6540, 77.2660],
+      [28.6530, 77.2720],
+      [28.6470, 77.2710],
+      [28.6460, 77.2640]
     ]
   }
 ];
@@ -551,6 +725,99 @@ export const RED_ZONE_VERSIONS: Record<'v1.0-2024' | 'v2.0-2025', RedZoneVersion
     ]
   }
 };
+
+export const DATA_CONFIDENCE_METRICS: DataConfidenceInfo = {
+  overallConfidencePct: 88,
+  sourceReliabilityPct: 91,
+  dataFreshnessPct: 95,
+  completenessPct: 94,
+  crossSourceConsistencyPct: 92,
+  domains: {
+    'population': {
+      rating: 'High',
+      source: 'DDMA Door-to-Door Geo-tagging & Delhi Electoral Roll (2024)',
+      lastUpdated: 'Q4 2025',
+      completenessPct: 96,
+      notes: 'Physical biometric enumeration cross-checked with electoral register numbers.'
+    },
+    'hydrology_hazard': {
+      rating: 'High',
+      source: 'Central Water Commission (CWC) Telemetric River Gauge & HEC-RAS 2D Model',
+      lastUpdated: 'January 2026',
+      completenessPct: 98,
+      notes: '100-year flood line calibrated with July 2023 peak 208.66m MSL inundation contour.'
+    },
+    'road_network': {
+      rating: 'High',
+      source: 'PWD Delhi GIS Cadastral Layer & OpenStreetMap Master',
+      lastUpdated: 'December 2025',
+      completenessPct: 93,
+      notes: 'Bridge widths and carriage way capacities verified through physical PWD field audits.'
+    },
+    'water_sanitation': {
+      rating: 'Moderate',
+      source: 'Delhi Jal Board (DJB) Bhagirathi WTP & Kondli STP Telemetry Registers',
+      lastUpdated: 'November 2025',
+      completenessPct: 85,
+      notes: 'Bulk feeder capacities verified; branch distribution network undergoing rehabilitation.'
+    },
+    'social_infra': {
+      rating: 'High',
+      source: 'DoE UDISE+ School Database & Delhi State Health Mission (DSHM)',
+      lastUpdated: 'Q3 2025',
+      completenessPct: 92,
+      notes: 'Student-to-classroom ratios and hospital bed occupancy audited per 2024-25 records.'
+    }
+  }
+};
+
+export const DATA_VALIDATION_CHECKS: ValidationCheck[] = [
+  {
+    id: 'VAL-01',
+    checkName: 'Population Demographic Triangulation',
+    domain: 'Demographics',
+    sourcesCompared: ['Census 2011 Enumeration', 'Special Summary Electoral Roll 2024', 'DDMA Field Door-to-Door Survey'],
+    status: 'PASS',
+    details: 'Population variance between electoral voter registration and field household headcount is within 3.4% acceptable tolerance.',
+    varianceMetric: '3.4% delta (Pass < 5.0%)'
+  },
+  {
+    id: 'VAL-02',
+    checkName: 'Infrastructure Geolocation Consistency',
+    domain: 'GIS Geometry',
+    sourcesCompared: ['Survey of India 1:25,000 Topo Sheet', 'OpenStreetMap Public Master', 'NIC State Spatial Data Infrastructure'],
+    status: 'PASS',
+    details: 'Spatial coordinate alignment across road centerlines and parcel boundaries verified with zero topological slivers.',
+    varianceMetric: '3.8m root-mean-square error'
+  },
+  {
+    id: 'VAL-03',
+    checkName: 'Hazard Hydrological Layer Freshness',
+    domain: 'Hydrology',
+    sourcesCompared: ['CWC Telemetry Gauge at Old Railway Bridge', 'IMD Doppler Radar Rainfall Runoff', 'Landsat-9 OLI Inundation Map'],
+    status: 'PASS',
+    details: '100-year flood boundary reflects post-July 2023 flood hydrology with 208.66m MSL crest calibration.',
+    varianceMetric: 'Calibrated Jan 2026'
+  },
+  {
+    id: 'VAL-04',
+    checkName: 'Candidate-Site Cadastral Mutation Check',
+    domain: 'Land Tenure',
+    sourcesCompared: ['DDA Master Plan (MPD-2041) Cadastral Maps', 'Delhi Revenue Dept Khasra Ledger'],
+    status: 'WARNING',
+    details: 'Site Epsilon (Geeta Colony) parcel boundary has pending municipal land dispute and incomplete cadastral mutation.',
+    varianceMetric: '1 parcel flagged'
+  },
+  {
+    id: 'VAL-05',
+    checkName: 'Inter-Agency Utility Capacity Verification',
+    domain: 'Carrying Capacity',
+    sourcesCompared: ['Delhi Jal Board Bhagirathi WTP Allocation', 'BSES Yamuna Power Distribution Load Ledger', 'PWD Road RoW Registry'],
+    status: 'PASS',
+    details: 'Infrastructure headroom numbers verified by inter-agency nodal officers under NCT of Delhi Disaster Management Committee.',
+    varianceMetric: 'Multi-Agency Certified'
+  }
+];
 
 export const MULTI_HAZARD_LAYERS_CONFIG = [
   { id: 'flood_inundation', name: 'Yamuna River 100-Year Peak Flood Inundation (>208.66m Level)', color: '#0284c7', opacity: 0.55, active: true },

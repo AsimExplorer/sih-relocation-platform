@@ -42,7 +42,9 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
   const totalPop = settlements.reduce((sum, s) => sum + s.population, 0);
   const totalHH = settlements.reduce((sum, s) => sum + s.households, 0);
   const immediateCount = settlements.filter(s => s.priority === 'Immediate').length;
-  const totalSafeCapacityHH = candidateSites.reduce((sum, s) => sum + s.calculatedCapacity.netSafeAbsorptionCapacityHH, 0);
+  const totalSafeCapacityHH = candidateSites
+    .filter(s => s.status !== 'REJECTED')
+    .reduce((sum, s) => sum + s.calculatedCapacity.netSafeAbsorptionCapacityHH, 0);
   const netMargin = totalSafeCapacityHH - totalHH;
 
   return (
@@ -52,19 +54,19 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-800 flex items-center gap-1.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-900 flex items-center gap-1.5">
                 <ShieldAlert className="w-4 h-4 text-blue-700" />
-                Delhi Disaster Management Decision-Support System
+                SURAKSHA — Delhi Disaster Relocation Decision Platform
               </span>
-              <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200 font-semibold">
-                East Delhi & Yamuna Basin Directive
+              <span className="text-[10px] bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200 font-semibold">
+                Permanent Resettlement Planning
               </span>
             </div>
             <h2 className="text-xl font-black text-slate-900 tracking-tight mt-1">
-              From Yamuna Flood Inundation to Planned Permanent Resettlement
+              From Yamuna Flood Inundation to Sustainable Permanent Resettlement
             </h2>
             <p className="text-xs text-slate-600 max-w-4xl mt-1 leading-relaxed">
-              Existing flood platforms merely alert during rising water levels. This system establishes statutory unsuitability for active floodplain habitations, determines relocation priority, calculates sustainable site carrying capacity with infrastructure binding constraints, and produces capacity-constrained matching into safe urban parcels (including the Surajmal Vihar / USAR institutional corridor).
+              SURAKSHA fundamentally differentiates <b>Permanent Relocation Planning</b> from temporary relief camps. It establishes statutory habitational unsuitability for active floodplain clusters, determines transparent relocation priority, calculates sustainable carrying capacity across 6 municipal resources (including Sanitation), rejects parcels with fatal bottlenecks, and matches displaced families into safe urban sectors (including the Surajmal Vihar / USAR corridor).
             </p>
           </div>
 
@@ -80,26 +82,28 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
           </div>
         </div>
 
-        {/* 8-Stage Workflow Bar */}
+        {/* 10-Stage Workflow Bar */}
         <div className="mt-4 pt-3 border-t border-slate-200 overflow-x-auto">
-          <div className="flex items-center justify-between min-w-[760px] text-[11px] font-bold">
-            <span className="text-blue-900 flex items-center gap-1">1. Flood Hazard Risk</span>
+          <div className="flex items-center justify-between min-w-[900px] text-[11px] font-bold">
+            <span className="text-blue-900 flex items-center gap-1">1. Multi-Hazard</span>
             <span className="text-slate-400">➔</span>
-            <span className="text-red-700 flex items-center gap-1">2. Statutory Red Zone</span>
+            <span className="text-red-700 flex items-center gap-1">2. Red Zone</span>
             <span className="text-slate-400">➔</span>
-            <span className="text-orange-700 flex items-center gap-1">3. Floodplain Habitations</span>
+            <span className="text-orange-700 flex items-center gap-1">3. Settlements</span>
             <span className="text-slate-400">➔</span>
-            <span className="text-amber-700 flex items-center gap-1">4. Relocation Priority</span>
+            <span className="text-amber-700 flex items-center gap-1">4. Priority</span>
             <span className="text-slate-400">➔</span>
             <span className="text-emerald-700 flex items-center gap-1">5. Candidate Sites</span>
             <span className="text-slate-400">➔</span>
             <span className="text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-300 flex items-center gap-1">
-              6. Carrying Capacity (FLAGSHIP)
+              6. Carrying Capacity (Min-Op)
             </span>
             <span className="text-slate-400">➔</span>
-            <span className="text-blue-700 flex items-center gap-1">7. Allocation Matching</span>
+            <span className="text-rose-700 flex items-center gap-1">7. Bottleneck Rejection</span>
             <span className="text-slate-400">➔</span>
-            <span className="text-slate-900 flex items-center gap-1">8. DDMA Brief</span>
+            <span className="text-blue-700 flex items-center gap-1">8. Matching</span>
+            <span className="text-slate-400">➔</span>
+            <span className="text-slate-900 flex items-center gap-1">9. Decision Brief</span>
           </div>
         </div>
       </div>

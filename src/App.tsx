@@ -86,6 +86,8 @@ export function App() {
         onToggleDemoMode={handleToggleDemoMode}
         isDemoMode={isDemoMode}
         onOpenReportModal={() => setIsReportModalOpen(true)}
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
       />
 
       {/* 2. Guided Tour Stepper Banner (when demo mode active) */}

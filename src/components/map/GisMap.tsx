@@ -135,20 +135,26 @@ export const GisMap: React.FC<GisMapProps> = ({
     if (layers.candidateSites) {
       candidateSites.forEach(site => {
         const isSelected = selectedSiteId === site.id;
+        const isRejected = site.status === 'REJECTED';
 
         const sitePoly = L.polygon(site.boundaryGeoJson, {
-          color: isSelected ? '#15803d' : '#16a34a',
+          color: isRejected ? '#dc2626' : (isSelected ? '#15803d' : '#16a34a'),
           weight: isSelected ? 3.5 : 2,
-          fillColor: '#22c55e',
-          fillOpacity: isSelected ? 0.35 : 0.2,
+          dashArray: isRejected ? '4, 4' : undefined,
+          fillColor: isRejected ? '#ef4444' : '#22c55e',
+          fillOpacity: isSelected ? 0.35 : (isRejected ? 0.18 : 0.2),
         });
 
         sitePoly.bindTooltip(
           `<div class="p-1 font-sans">
-            <div class="text-xs font-bold text-emerald-800">${site.name}</div>
+            <div class="flex items-center gap-1">
+              <span class="text-xs font-bold ${isRejected ? 'text-red-700' : 'text-emerald-800'}">${site.name}</span>
+              <span class="text-[9px] px-1 py-0.2 rounded font-bold uppercase ${isRejected ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">${site.status}</span>
+            </div>
             <div class="text-xs text-slate-900 mt-0.5">Safe Capacity: <b>${site.calculatedCapacity.netSafeAbsorptionCapacityHH} HH</b> (${site.calculatedCapacity.netSafePopulationCapacity} persons)</div>
             <div class="text-[11px] text-amber-800 font-semibold mt-0.5">Limiting Constraint: ${site.calculatedCapacity.bindingConstraint}</div>
             <div class="text-[11px] text-slate-600">Suitability: ${site.suitabilityScore}/100 | Elevation: ${site.elevationMeters}m MSL</div>
+            ${isRejected ? `<div class="text-[10px] text-red-700 font-medium mt-0.5">${site.statusReason}</div>` : ''}
           </div>`,
           { sticky: true }
         );
@@ -161,15 +167,19 @@ export const GisMap: React.FC<GisMapProps> = ({
           className: 'custom-site-marker',
           html: `
             <div class="flex flex-col items-center cursor-pointer transition-transform hover:scale-105">
-              <div class="px-2 py-0.5 rounded bg-white text-emerald-800 border ${isSelected ? 'border-emerald-600 ring-2 ring-emerald-300' : 'border-emerald-500'} text-[11px] font-bold shadow-md flex items-center gap-1 font-mono">
-                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
-                <span>${site.calculatedCapacity.netSafeAbsorptionCapacityHH} HH</span>
+              <div class="px-2 py-0.5 rounded bg-white ${
+                isRejected 
+                  ? 'text-red-800 border border-red-500' 
+                  : `text-emerald-800 border ${isSelected ? 'border-emerald-600 ring-2 ring-emerald-300' : 'border-emerald-500'}`
+              } text-[11px] font-bold shadow-md flex items-center gap-1 font-mono">
+                <span class="w-2 h-2 rounded-full ${isRejected ? 'bg-red-600' : 'bg-emerald-600'}"></span>
+                <span>${isRejected ? '[REJ] ' : ''}${site.calculatedCapacity.netSafeAbsorptionCapacityHH} HH</span>
               </div>
-              <div class="w-1.5 h-1.5 bg-emerald-600 rotate-45 -mt-0.5"></div>
+              <div class="w-1.5 h-1.5 ${isRejected ? 'bg-red-600' : 'bg-emerald-600'} rotate-45 -mt-0.5"></div>
             </div>
           `,
-          iconSize: [85, 28],
-          iconAnchor: [42, 28],
+          iconSize: [isRejected ? 95 : 85, 28],
+          iconAnchor: [isRejected ? 47 : 42, 28],
         });
 
         const marker = L.marker([site.lat, site.lng], { icon: siteIcon });

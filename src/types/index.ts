@@ -1,10 +1,20 @@
 export type PriorityLevel = 'Immediate' | 'Short-Term' | 'Medium-Term';
+export type SiteStatus = 'FEASIBLE' | 'LIMITED' | 'REJECTED';
 
 export interface HistoricalDisasterEvent {
   year: number;
   eventType: string;
   fatalities: number;
   damageDesc: string;
+}
+
+export interface SettlementRiskBreakdown {
+  floodInundationRisk: number;      // 0-100: CWC 208.66m flood depth envelope
+  siltLiquefactionRisk: number;     // 0-100: Saturated alluvial sand scour
+  drainageBackflowRisk: number;     // 0-100: Siphon / regulator closure backwater
+  populationVulnerability: number;  // 0-100: Non-pucca density & socio-economic
+  historicalDisasterRecurrence: number; // 0-100: 2013, 2019, 2023 flood events
+  accessibilityImpedance: number;   // 0-100: Roadway submergence & boat dependency
 }
 
 export interface Settlement {
@@ -27,6 +37,8 @@ export interface Settlement {
   riskScore: number; // 0-100
   priority: PriorityLevel;
   recommendedAction: string;
+  riskBreakdown: SettlementRiskBreakdown;
+  keyRiskDrivers: string[];
   factors: {
     hazardRecurrence: number;
     redZoneOverlap: number;
@@ -46,6 +58,7 @@ export type ConstraintType =
   | 'Road Access / Evacuation Width' 
   | 'School & Educational Capacity' 
   | 'Healthcare Capacity' 
+  | 'Sanitation & Wastewater Treatment'
   | 'Buildable Land';
 
 export interface CandidateSiteConstraints {
@@ -54,6 +67,10 @@ export interface CandidateSiteConstraints {
   internalInfraOverheadPct: number;
   waterSustainableYieldLitersPerDay: number;
   waterLpcdStandard: number;
+  sanitationFacilityName: string;
+  sanitationDailyTreatmentCapacityLiters: number;
+  sanitationCapacityHH: number;
+  sanitationUtilizationPct: number;
   roadWidthMeters: number;
   roadHourlyPcuCapacity: number;
   healthcareFacilityName: string;
@@ -67,6 +84,7 @@ export interface CandidateSiteConstraints {
 export interface CalculatedCapacity {
   landCapacityHH: number;
   waterCapacityHH: number;
+  sanitationCapacityHH: number;
   roadCapacityHH: number;
   healthCapacityHH: number;
   schoolCapacityHH: number;
@@ -90,11 +108,15 @@ export interface CandidateSite {
   elevationMeters: number;
   distanceToSettlements: Record<string, number>; // settlementId -> km
   suitabilityScore: number; // 0-100
+  status: SiteStatus;
+  statusReason: string;
+  rejectionReason?: string;
   suitabilityFactors: {
     hazardSafety: number;
     buildableSlope: number;
     roadConnectivity: number;
     waterProximity: number;
+    sanitationAccess: number;
     healthcareAccess: number;
     schoolAccess: number;
     landTenure: number;
@@ -102,6 +124,17 @@ export interface CandidateSite {
   rawConstraints: CandidateSiteConstraints;
   calculatedCapacity: CalculatedCapacity;
   boundaryGeoJson: [number, number][]; // [lat, lng] polygon ring
+}
+
+export interface EvaluatedSiteOutcome {
+  siteId: string;
+  siteName: string;
+  status: SiteStatus;
+  safeCapacityHH: number;
+  requiredHH: number;
+  deficitHH: number;
+  bindingConstraint: ConstraintType;
+  reason: string;
 }
 
 export interface AllocationAssignment {
@@ -117,11 +150,14 @@ export interface AllocationAssignment {
   capacityTotalHH: number;
   siteUtilizationPct: number;
   remainingCapacityHH: number;
+  bindingConstraint: ConstraintType;
   rationale: string[];
+  candidateSitesEvaluated?: EvaluatedSiteOutcome[];
+  rejectedSites?: EvaluatedSiteOutcome[];
 }
 
 export interface RedZoneVersionData {
-  version: 'v1.0-2025' | 'v2.0-2026';
+  version: 'v1.0-2024' | 'v2.0-2025';
   label: string;
   date: string;
   gazetteNotification: string;
@@ -142,6 +178,33 @@ export interface AuditEntry {
   details: string;
   status: 'VERIFIED' | 'AMENDED' | 'PUBLISHED';
   artifactHash?: string;
+}
+
+export interface DataConfidenceDomain {
+  rating: 'High' | 'Moderate' | 'Low';
+  source: string;
+  lastUpdated: string;
+  completenessPct: number;
+  notes: string;
+}
+
+export interface DataConfidenceInfo {
+  overallConfidencePct: number;
+  sourceReliabilityPct: number;
+  dataFreshnessPct: number;
+  completenessPct: number;
+  crossSourceConsistencyPct: number;
+  domains: Record<string, DataConfidenceDomain>;
+}
+
+export interface ValidationCheck {
+  id: string;
+  checkName: string;
+  domain: string;
+  sourcesCompared: string[];
+  status: 'PASS' | 'WARNING' | 'INCOMPLETE';
+  details: string;
+  varianceMetric: string;
 }
 
 export type ActiveTab = 
