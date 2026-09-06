@@ -218,3 +218,22 @@ export type ActiveTab =
   | 'allocation'
   | 'recommendations'
   | 'audit';
+
+export interface AiRiskAssessment {
+  settlementId: string;
+  priority: PriorityLevel;
+  riskScore: number; // 0-100: AI Risk Score (not a probability)
+  topDrivers: string[]; // Top 3 risk drivers
+  recommendation: string; // Relocation action guidance
+  assessmentSummary: string; // Explainable administrative justification
+}
+
+export interface AiAssessmentBatchResponse {
+  success: boolean;
+  isFallback: boolean;
+  source: string;
+  timestamp: string;
+  assessments: Record<string, AiRiskAssessment>;
+  message?: string;
+}
+

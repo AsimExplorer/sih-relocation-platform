@@ -66,7 +66,7 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
               From Yamuna Flood Inundation to Sustainable Permanent Resettlement
             </h2>
             <p className="text-xs text-slate-600 max-w-4xl mt-1 leading-relaxed">
-              SURAKSHA fundamentally differentiates <b>Permanent Relocation Planning</b> from temporary relief camps. It establishes habitational unsuitability for active floodplain clusters, determines transparent relocation priority, calculates sustainable carrying capacity across 6 municipal resources (including Sanitation), rejects parcels with fatal bottlenecks, and matches displaced families into safe urban sectors (including the Surajmal Vihar / USAR corridor).
+              SURAKSHA fundamentally differentiates <b>Permanent Relocation Planning</b> from temporary relief camps. It establishes habitational unsuitability for active floodplain clusters, determines explainable AI-assisted relocation priority, calculates sustainable carrying capacity across 6 municipal resources (including Sanitation), rejects parcels with fatal bottlenecks, and matches displaced families into safe urban sectors (including the Surajmal Vihar / USAR corridor).
             </p>
           </div>
 
@@ -91,7 +91,9 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
             <span className="text-slate-400">➔</span>
             <span className="text-orange-700 flex items-center gap-1">3. Settlements</span>
             <span className="text-slate-400">➔</span>
-            <span className="text-amber-700 flex items-center gap-1">4. Priority</span>
+            <span className="text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200 flex items-center gap-1">
+              4. AI Priority
+            </span>
             <span className="text-slate-400">➔</span>
             <span className="text-emerald-700 flex items-center gap-1">5. Candidate Sites</span>
             <span className="text-slate-400">➔</span>

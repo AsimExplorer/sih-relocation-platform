@@ -1,6 +1,7 @@
 import React from 'react';
-import { Shield, Sparkles, MapPin, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Shield, Sparkles, MapPin, AlertTriangle, CheckCircle2, Waves, Plus } from 'lucide-react';
 import { RedZoneVersionData, ActiveTab } from '../../types';
+import { DisasterScenario, SCENARIO_LIST } from '../../data/scenariosData';
 
 interface HeaderProps {
   currentRedZoneVersion: RedZoneVersionData;
@@ -8,6 +9,9 @@ interface HeaderProps {
   isDemoMode: boolean;
   activeTab: ActiveTab;
   onSelectTab: (tab: ActiveTab) => void;
+  activeScenario?: DisasterScenario;
+  onSelectScenario?: (scenarioId: string) => void;
+  onOpenIngestionModal?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,12 +20,15 @@ export const Header: React.FC<HeaderProps> = ({
   isDemoMode,
   activeTab,
   onSelectTab,
+  activeScenario,
+  onSelectScenario,
+  onOpenIngestionModal,
 }) => {
   const pipelineSteps: { id: ActiveTab; stepNumber: number; title: string }[] = [
     { id: 'hazard', stepNumber: 1, title: 'Multi-Hazard' },
     { id: 'redzone', stepNumber: 2, title: 'Red Zone' },
     { id: 'settlements', stepNumber: 3, title: 'Settlements' },
-    { id: 'priority', stepNumber: 4, title: 'Priority' },
+    { id: 'priority', stepNumber: 4, title: 'AI Priority' },
     { id: 'candidates', stepNumber: 5, title: 'Candidate Sites' },
     { id: 'capacity', stepNumber: 6, title: 'Carrying Capacity' },
     { id: 'allocation', stepNumber: 7, title: 'Allocation' },
@@ -49,9 +56,51 @@ export const Header: React.FC<HeaderProps> = ({
           </span>
         </div>
 
-        {/* Action CTAs */}
+        {/* Action CTAs & Scenario Controls */}
         <div className="flex items-center flex-wrap gap-2 text-xs">
-          <div className="bg-slate-50 px-2.5 py-1.5 rounded-md border border-slate-200 flex items-center gap-1.5 text-slate-700">
+          {/* Live Scenario Selector Dropdown */}
+          {activeScenario && onSelectScenario && (
+            <div className="bg-slate-50 px-2 py-1 rounded-md border border-slate-200 flex items-center gap-1.5 text-slate-800">
+              <Waves className="w-3.5 h-3.5 text-blue-700 shrink-0" />
+              <span className="font-semibold text-[11px] text-slate-500 hidden md:inline">Scenario:</span>
+              <select
+                value={activeScenario.id}
+                onChange={e => onSelectScenario(e.target.value)}
+                className="bg-white text-slate-900 border border-slate-300 rounded px-2 py-0.5 text-xs font-bold focus:ring-1 focus:ring-blue-500 cursor-pointer max-w-[200px] truncate"
+                title="Select a disaster scenario to simulate evolving flood conditions"
+              >
+                {SCENARIO_LIST.map(sc => (
+                  <option key={sc.id} value={sc.id}>
+                    {sc.shortTitle}
+                  </option>
+                ))}
+              </select>
+              <span className={'px-1.5 py-0.5 rounded text-[10px] font-bold font-mono hidden lg:inline ' + (
+                activeScenario.severity === 'Catastrophic'
+                  ? 'bg-red-100 text-red-900 border border-red-300'
+                  : activeScenario.severity === 'Severe'
+                  ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                  : 'bg-blue-100 text-blue-900 border border-blue-300'
+              )}>
+                {activeScenario.waterLevelMeters}m MSL
+              </span>
+            </div>
+          )}
+
+          {/* Ingest Live Data Button */}
+          {onOpenIngestionModal && (
+            <button
+              onClick={onOpenIngestionModal}
+              className="bg-blue-900 hover:bg-blue-950 text-white px-2.5 py-1.5 rounded-md font-bold text-xs flex items-center gap-1.5 shadow-xs border border-blue-950 transition-colors cursor-pointer"
+              title="Open disaster scenario manager and live habitation data ingestion"
+            >
+              <Plus className="w-3.5 h-3.5 text-blue-200" />
+              <span className="hidden sm:inline">Live Ingestion Lab</span>
+              <span className="sm:hidden">Ingest</span>
+            </button>
+          )}
+
+          <div className="bg-slate-50 px-2.5 py-1.5 rounded-md border border-slate-200 flex items-center gap-1.5 text-slate-700 hidden xl:flex">
             <MapPin className="w-3.5 h-3.5 text-blue-600" />
             <span className="font-bold text-slate-900">East Delhi</span>
             <span className="text-[11px] text-slate-500">(USAR Hub)</span>
@@ -60,16 +109,16 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="bg-red-50 px-2.5 py-1.5 rounded-md border border-red-200 flex items-center gap-1.5 text-red-900 font-mono text-[11px]">
             <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
             <span className="font-bold">{currentRedZoneVersion.label.split(' ')[0]}</span>
-            <span className="text-red-700">({currentRedZoneVersion.date})</span>
+            <span className="text-red-700 hidden sm:inline">({currentRedZoneVersion.date})</span>
           </div>
 
           <button
             onClick={onToggleDemoMode}
-            className={`px-3 py-1.5 rounded-md font-bold text-xs flex items-center gap-1.5 transition-all border shadow-xs ${
+            className={'px-3 py-1.5 rounded-md font-bold text-xs flex items-center gap-1.5 transition-all border shadow-xs ' + (
               isDemoMode
                 ? 'bg-amber-500 text-slate-950 border-amber-600 hover:bg-amber-400'
                 : 'bg-blue-700 text-white border-blue-800 hover:bg-blue-800'
-            }`}
+            )}
           >
             <Sparkles className="w-3.5 h-3.5" />
             {isDemoMode ? 'Exit Tour' : 'Interactive SURAKSHA Tour'}
@@ -84,11 +133,11 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Overview Button */}
             <button
               onClick={() => onSelectTab('overview')}
-              className={`px-3 py-1 rounded-full flex items-center gap-1.5 text-xs transition-all whitespace-nowrap ${
+              className={'px-3 py-1 rounded-full flex items-center gap-1.5 text-xs transition-all whitespace-nowrap ' + (
                 activeTab === 'overview'
                   ? 'bg-blue-700 text-white font-bold shadow-xs'
                   : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 font-semibold'
-              }`}
+              )}
             >
               <span>Overview</span>
             </button>
@@ -102,20 +151,20 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   key={step.id}
                   onClick={() => onSelectTab(step.id)}
-                  className={`px-3 py-1 rounded-full flex items-center gap-1.5 text-xs transition-all whitespace-nowrap font-medium ${
+                  className={'px-3 py-1 rounded-full flex items-center gap-1.5 text-xs transition-all whitespace-nowrap font-medium ' + (
                     isCurrent
                       ? 'bg-blue-700 text-white font-bold shadow-xs'
                       : isCompleted
                       ? 'bg-emerald-50 text-emerald-900 border border-emerald-300 font-semibold hover:bg-emerald-100'
                       : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
-                  }`}
+                  )}
                 >
                   {isCompleted ? (
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                   ) : (
-                    <span className={`w-4 h-4 rounded-full text-[10px] font-bold flex items-center justify-center shrink-0 ${
+                    <span className={'w-4 h-4 rounded-full text-[10px] font-bold flex items-center justify-center shrink-0 ' + (
                       isCurrent ? 'bg-white text-blue-700' : 'bg-slate-100 text-slate-700'
-                    }`}>
+                    )}>
                       {step.stepNumber}
                     </span>
                   )}

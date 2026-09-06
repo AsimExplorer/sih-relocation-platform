@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  SETTLEMENTS_DATA, 
   CANDIDATE_SITES_DATA, 
   RED_ZONE_VERSIONS 
 } from './data/delhiData';
+import { SCENARIOS, DisasterScenario } from './data/scenariosData';
 import { solveCapacityConstrainedAllocation } from './engine/matchingEngine';
-import { ActiveTab } from './types';
+import { ActiveTab, AiAssessmentBatchResponse, Settlement } from './types';
+import { fetchAiRiskAssessments } from './services/aiAssessmentService';
 
 // Layout Components
 import { Header } from './components/layout/Header';
@@ -25,11 +26,18 @@ import { AuditMethodologyModule } from './components/modules/AuditMethodologyMod
 
 // Modals
 import { OfficialReportModal } from './components/modals/OfficialReportModal';
+import { DataIngestionModal } from './components/modals/DataIngestionModal';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [redZoneVersionKey, setRedZoneVersionKey] = useState<'v1.0-2024' | 'v2.0-2025'>('v2.0-2025');
   
+  // Live Scenario & Dynamic Settlements State
+  const [activeScenarioId, setActiveScenarioId] = useState<string>('baseline');
+  const [settlements, setSettlements] = useState<Settlement[]>(
+    () => JSON.parse(JSON.stringify(SCENARIOS['baseline'].settlements))
+  );
+
   const [selectedSettlementId, setSelectedSettlementId] = useState<string | null>('SET-01');
   const [selectedSiteId, setSelectedSiteId] = useState<string | null>('SITE-01');
   
@@ -37,17 +45,116 @@ export function App() {
   const [isDemoMode, setIsDemoMode] = useState<boolean>(false);
   const [demoStep, setDemoStep] = useState<number>(1);
 
-  // Official Report Modal state
+  // Modals state
   const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false);
+  const [isIngestionModalOpen, setIsIngestionModalOpen] = useState<boolean>(false);
+
+  // AI-Assisted Relocation Priority Engine state
+  const [aiAssessment, setAiAssessment] = useState<AiAssessmentBatchResponse | null>(null);
+  const [isLoadingAi, setIsLoadingAi] = useState<boolean>(true);
+
+  // Active Scenario Metadata
+  const activeScenario: DisasterScenario = SCENARIOS[activeScenarioId] || {
+    id: 'custom',
+    name: 'Live Custom Feed Scenario',
+    shortTitle: 'Custom Ingested Feed',
+    badge: 'Live Data Ingestion',
+    waterLevelMeters: 206.50,
+    hathnikundDischargeCusecs: 210000,
+    severity: 'Severe',
+    incidentSummary: 'Active custom scenario with user-injected habitation data evaluated in real-time.',
+    keyHydrologicalTriggers: ['Custom surveyed habitations added to live decision stream'],
+    settlements
+  };
+
+  // Initial load of AI assessment
+  useEffect(() => {
+    let isMounted = true;
+    fetchAiRiskAssessments(settlements)
+      .then((res) => {
+        if (isMounted) {
+          setAiAssessment(res);
+          setIsLoadingAi(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setIsLoadingAi(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Handle Scenario Switching
+  const handleSelectScenario = async (scenarioId: string) => {
+    setActiveScenarioId(scenarioId);
+    const sc = SCENARIOS[scenarioId];
+    if (sc) {
+      const newSettlements: Settlement[] = JSON.parse(JSON.stringify(sc.settlements));
+      setSettlements(newSettlements);
+      setSelectedSettlementId(newSettlements[0]?.id || null);
+
+      // Auto-trigger Gemini AI evaluation on the new scenario!
+      setIsLoadingAi(true);
+      try {
+        const res = await fetchAiRiskAssessments(newSettlements, true);
+        setAiAssessment(res);
+      } finally {
+        setIsLoadingAi(false);
+      }
+    }
+  };
+
+  // Handle Ingestion of New Settlement
+  const handleAddCustomSettlement = async (newSettlement: Settlement) => {
+    const updated = [...settlements, newSettlement];
+    setSettlements(updated);
+    setSelectedSettlementId(newSettlement.id);
+    setActiveScenarioId('custom');
+
+    // Auto-trigger Gemini AI evaluation for the newly ingested data!
+    setIsLoadingAi(true);
+    try {
+      const res = await fetchAiRiskAssessments(updated, true);
+      setAiAssessment(res);
+    } finally {
+      setIsLoadingAi(false);
+    }
+  };
+
+  // Handle Reset to Baseline
+  const handleResetToBaseline = async () => {
+    setActiveScenarioId('baseline');
+    const baseline: Settlement[] = JSON.parse(JSON.stringify(SCENARIOS['baseline'].settlements));
+    setSettlements(baseline);
+    setSelectedSettlementId(baseline[0]?.id || null);
+
+    setIsLoadingAi(true);
+    try {
+      const res = await fetchAiRiskAssessments(baseline, true);
+      setAiAssessment(res);
+    } finally {
+      setIsLoadingAi(false);
+    }
+  };
+
+  const handleReassess = async () => {
+    setIsLoadingAi(true);
+    try {
+      const res = await fetchAiRiskAssessments(settlements, true);
+      setAiAssessment(res);
+    } finally {
+      setIsLoadingAi(false);
+    }
+  };
 
   const activeRedZoneVersion = RED_ZONE_VERSIONS[redZoneVersionKey];
   
-  // Matching solver execution
-  const matchingResult = solveCapacityConstrainedAllocation(SETTLEMENTS_DATA, CANDIDATE_SITES_DATA);
-
-  const totalVulnerablePop = SETTLEMENTS_DATA.reduce((sum, s) => sum + s.population, 0);
-  const totalSafeCapacityHH = CANDIDATE_SITES_DATA.reduce((sum, s) => sum + s.calculatedCapacity.netSafeAbsorptionCapacityHH, 0);
-  const immediateCount = SETTLEMENTS_DATA.filter(s => s.priority === 'Immediate').length;
+  // Matching solver dynamically recalculates whenever settlements state changes!
+  const matchingResult = solveCapacityConstrainedAllocation(settlements, CANDIDATE_SITES_DATA);
 
   const handleToggleDemoMode = () => {
     if (isDemoMode) {
@@ -79,13 +186,16 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
-      {/* 1. Header */}
+      {/* 1. Header with Scenario Controls */}
       <Header
         currentRedZoneVersion={activeRedZoneVersion}
         onToggleDemoMode={handleToggleDemoMode}
         isDemoMode={isDemoMode}
         activeTab={activeTab}
         onSelectTab={setActiveTab}
+        activeScenario={activeScenario}
+        onSelectScenario={handleSelectScenario}
+        onOpenIngestionModal={() => setIsIngestionModalOpen(true)}
       />
 
       {/* 2. Guided Tour Stepper Banner (when demo mode active) */}
@@ -102,11 +212,10 @@ export function App() {
 
       {/* 3. Main Operational Workspace (Full Width) */}
       <div className="flex-1 flex max-w-[1920px] w-full mx-auto overflow-hidden">
-        {/* Central View Content - 100% Width */}
         <main className="flex-1 p-4 md:p-6 overflow-y-auto bg-slate-50 w-full">
           {activeTab === 'overview' && (
             <OverviewModule
-              settlements={SETTLEMENTS_DATA}
+              settlements={settlements}
               candidateSites={CANDIDATE_SITES_DATA}
               activeRedZoneVersion={activeRedZoneVersion}
               assignments={matchingResult.assignments}
@@ -119,7 +228,10 @@ export function App() {
           )}
 
           {activeTab === 'hazard' && (
-            <MultiHazardModule />
+            <MultiHazardModule 
+              settlements={settlements}
+              activeScenario={activeScenario}
+            />
           )}
 
           {activeTab === 'redzone' && (
@@ -131,7 +243,7 @@ export function App() {
 
           {activeTab === 'settlements' && (
             <SettlementsModule
-              settlements={SETTLEMENTS_DATA}
+              settlements={settlements}
               selectedSettlementId={selectedSettlementId}
               onSelectSettlement={(id) => setSelectedSettlementId(id)}
             />
@@ -139,7 +251,10 @@ export function App() {
 
           {activeTab === 'priority' && (
             <PriorityModule
-              settlements={SETTLEMENTS_DATA}
+              settlements={settlements}
+              aiAssessment={aiAssessment}
+              isLoadingAi={isLoadingAi}
+              onReassess={handleReassess}
             />
           )}
 
@@ -162,7 +277,7 @@ export function App() {
 
           {activeTab === 'allocation' && (
             <AllocationModule
-              settlements={SETTLEMENTS_DATA}
+              settlements={settlements}
               candidateSites={CANDIDATE_SITES_DATA}
               assignments={matchingResult.assignments}
               onSelectSettlement={(id) => setSelectedSettlementId(id)}
@@ -172,7 +287,7 @@ export function App() {
 
           {activeTab === 'recommendations' && (
             <RecommendationsModule
-              settlements={SETTLEMENTS_DATA}
+              settlements={settlements}
               candidateSites={CANDIDATE_SITES_DATA}
               assignments={matchingResult.assignments}
               onOpenReportModal={() => setIsReportModalOpen(true)}
@@ -185,11 +300,22 @@ export function App() {
         </main>
       </div>
 
-      {/* 4. Official Report Export Modal */}
+      {/* 4. Live Data Ingestion & Disaster Scenario Modal */}
+      <DataIngestionModal
+        isOpen={isIngestionModalOpen}
+        onClose={() => setIsIngestionModalOpen(false)}
+        activeScenarioId={activeScenarioId}
+        onSelectScenario={handleSelectScenario}
+        onAddCustomSettlement={handleAddCustomSettlement}
+        onResetToBaseline={handleResetToBaseline}
+        activeSettlementsCount={settlements.length}
+      />
+
+      {/* 5. Official Report Export Modal */}
       <OfficialReportModal
         isOpen={isReportModalOpen}
         onClose={() => setIsReportModalOpen(false)}
-        settlements={SETTLEMENTS_DATA}
+        settlements={settlements}
         candidateSites={CANDIDATE_SITES_DATA}
         assignments={matchingResult.assignments}
         redZoneVersion={activeRedZoneVersion}

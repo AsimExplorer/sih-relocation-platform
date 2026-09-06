@@ -42,36 +42,43 @@ export const TOUR_STEPS = [
   },
   {
     step: 5,
-    tab: 'candidates' as ActiveTab,
-    title: 'Step 5: Review Candidate Relocation Sites (Suitability Scoring)',
-    narrative: 'Evaluate 5 candidate resettlement parcels (Site Alpha - Karkardooma near USAR, Site Beta - Mandoli, Site Gamma - Anand Vihar, Site Delta - Bakkarwala, Site Epsilon - Disqualified).',
-    keyTakeaway: 'Suitability scores (79-88/100) evaluate flood safety, road connectivity, and institutional buffers.'
+    tab: 'priority' as ActiveTab,
+    title: 'Step 5: AI-Assisted Relocation Priority Engine',
+    narrative: 'Observe the advisory AI layer: evaluates multi-hazard exposure, flood recurrence frequency, and exposed population to generate explainable relocation urgency classifications and top 3 risk drivers. Candidate site safety and carrying capacities remain strictly guarded by deterministic engines.',
+    keyTakeaway: 'AI provides explainable prioritization; GIS and civil-engineering rule engines enforce hard physical safety.'
   },
   {
     step: 6,
-    tab: 'capacity' as ActiveTab,
-    title: 'Step 6: FLAGSHIP — Site Carrying Capacity & Binding Constraints',
-    narrative: 'Inspect Site Alpha (Karkardooma / USAR Hub): Land allows 820 households, but Safe Absorption Capacity is strictly capped at 620 households! Why? Delhi Jal Board (DJB) water pipeline capacity is the Binding Constraint.',
-    keyTakeaway: 'Deterministic min-operator: Safe Capacity = min(Land, Water, Road, Health, School, Sanitation). Transparent and non-blackbox.'
+    tab: 'candidates' as ActiveTab,
+    title: 'Step 6: Review Candidate Relocation Sites (Suitability Scoring)',
+    narrative: 'Evaluate candidate resettlement parcels (Site Alpha - Karkardooma near USAR, Site Beta - Mandoli, Site Gamma - Anand Vihar, Site Delta - Bakkarwala, Site Epsilon - Disqualified).',
+    keyTakeaway: 'Suitability scores (79-88/100) evaluate flood safety, road connectivity, and institutional buffers.'
   },
   {
     step: 7,
+    tab: 'capacity' as ActiveTab,
+    title: 'Step 7: FLAGSHIP — Site Carrying Capacity & Binding Constraints',
+    narrative: 'Inspect Site Alpha (Karkardooma / USAR Hub): Land allows 820 households, but Safe Absorption Capacity is strictly capped at 620 households! Why? Delhi Jal Board (DJB) water pipeline capacity is the Binding Constraint.',
+    keyTakeaway: 'Deterministic min-operator: Safe Capacity = min(Land, Water, Sanitation, Road, Health, School). Transparent and non-blackbox.'
+  },
+  {
+    step: 8,
     tab: 'allocation' as ActiveTab,
-    title: 'Step 7: Capacity-Constrained Population-to-Site Matching',
+    title: 'Step 8: Capacity-Constrained Population-to-Site Matching',
     narrative: 'Demonstrates shared public capacity: Yamuna Khadar takes 620 HH of Site Alpha, locking it. Garhi Mandu must be routed to Site Beta (588 of 780 HH capacity).',
     keyTakeaway: 'Sites are shared resources. Allocation accounts for capacity headroom and origin-destination routes.'
   },
   {
-    step: 8,
+    step: 9,
     tab: 'recommendations' as ActiveTab,
-    title: 'Step 8: Executive Relocation Decision Brief',
+    title: 'Step 9: Executive Relocation Decision Brief',
     narrative: 'Review synthesized relocation brief: specific reasons for selection, alternatives rejected, confidence metrics (88%), and comparative evaluation.',
     keyTakeaway: 'Audit-ready, deterministic decision support with explicit mathematical rationale.'
   },
   {
-    step: 9,
+    step: 10,
     tab: 'audit' as ActiveTab,
-    title: 'Step 9: Audit Trail, Provenance & Methodology Verification',
+    title: 'Step 10: Audit Trail, Provenance & Methodology Verification',
     narrative: 'Inspect the transparent audit ledger, multi-source agency benchmarks (CWC / DJB / PWD / NGT), and reference records.',
     keyTakeaway: 'Accountable decision support from flood risk assessment to sustainable resettlement.'
   }

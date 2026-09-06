@@ -11,10 +11,20 @@ import {
   BarChart3
 } from 'lucide-react';
 import { MULTI_HAZARD_LAYERS_CONFIG, SETTLEMENTS_DATA, DATA_CONFIDENCE_METRICS } from '../../data/delhiData';
+import { Settlement } from '../../types';
+import { DisasterScenario } from '../../data/scenariosData';
 
-export const MultiHazardModule: React.FC = () => {
-  const [selectedSettlementId, setSelectedSettlementId] = useState<string>(SETTLEMENTS_DATA[0].id);
-  const activeSettlement = SETTLEMENTS_DATA.find(s => s.id === selectedSettlementId) || SETTLEMENTS_DATA[0];
+interface MultiHazardModuleProps {
+  settlements?: Settlement[];
+  activeScenario?: DisasterScenario;
+}
+
+export const MultiHazardModule: React.FC<MultiHazardModuleProps> = ({ 
+  settlements = SETTLEMENTS_DATA,
+  activeScenario 
+}) => {
+  const [selectedSettlementId, setSelectedSettlementId] = useState<string>(settlements[0]?.id || SETTLEMENTS_DATA[0].id);
+  const activeSettlement = settlements.find(s => s.id === selectedSettlementId) || settlements[0] || SETTLEMENTS_DATA[0];
 
   const breakdownFactors = [
     { label: 'Flood Inundation Depth Risk (CWC >208.66m Level)', score: activeSettlement.riskBreakdown.floodInundationRisk, weight: '25%', color: 'bg-blue-600' },
@@ -103,7 +113,7 @@ export const MultiHazardModule: React.FC = () => {
 
           {/* Settlement Selector */}
           <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-300 overflow-x-auto">
-            {SETTLEMENTS_DATA.map(s => (
+            {settlements.map(s => (
               <button
                 key={s.id}
                 onClick={() => setSelectedSettlementId(s.id)}
