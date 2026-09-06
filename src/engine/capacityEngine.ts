@@ -107,7 +107,7 @@ export function computeSiteCarryingCapacity(
     case 'Buildable Land':
       limitingBottleneckValue = landCapacityHH + ' physical plots';
       limitingBottleneckRequired = 'N/A (Full parcel utilized)';
-      bindingConstraintExplanation = 'Total net developable area after statutory environmental green buffer and internal circulation reserves limits site capacity to ' + netSafeAbsorptionCapacityHH + ' households.';
+      bindingConstraintExplanation = 'Total net developable area after environmental green buffer and internal circulation reserves limits site capacity to ' + netSafeAbsorptionCapacityHH + ' households.';
       break;
   }
 

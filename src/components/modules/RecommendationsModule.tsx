@@ -42,10 +42,10 @@ export const RecommendationsModule: React.FC<RecommendationsModuleProps> = ({
             <span>Stage 8: Decision-Ready Relocation Brief & Rejection Audit</span>
           </div>
           <h2 className="text-xl font-black text-slate-900 tracking-tight mt-1">
-            Statutory Resettlement Recommendations & Site Rejection Log
+            Relocation Recommendations & Site Rejection Log
           </h2>
           <p className="text-xs text-slate-600 max-w-3xl mt-1 leading-relaxed">
-            Formally synthesized administrative decision brief for the District Disaster Management Authority (DDMA East Delhi) and the State Executive Committee, Government of NCT of Delhi. Combines multi-hazard urgency, site suitability, capacity limits, and explicit rejection justifications for disqualified alternatives.
+            Synthesized relocation decision brief combining multi-hazard urgency, site suitability, capacity limits, and explicit rejection justifications for disqualified alternatives.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export const RecommendationsModule: React.FC<RecommendationsModuleProps> = ({
           className="px-3.5 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs shrink-0"
         >
           <Printer className="w-4 h-4" />
-          <span>Export Executive DDMA Brief</span>
+          <span>Print Decision Brief</span>
         </button>
       </div>
 
@@ -81,7 +81,7 @@ export const RecommendationsModule: React.FC<RecommendationsModuleProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-200">
           <div>
             <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest block">
-              OFFICIAL DECISION DOSSIER • DDMA/DEL/RELOC/2026-SURAKSHA
+              EXECUTIVE DECISION BRIEF • SURAKSHA-DEL-RELOC-2026
             </span>
             <h3 className="text-base font-extrabold text-slate-900 mt-0.5">
               Permanent Relocation Plan for: {activeSettlement.name}
@@ -102,12 +102,12 @@ export const RecommendationsModule: React.FC<RecommendationsModuleProps> = ({
           <div className="flex items-center justify-between font-bold text-slate-900">
             <span className="text-red-900 flex items-center gap-1.5">
               <ShieldAlert className="w-4 h-4 text-red-600" />
-              Statutory Basis for Habitational Condemnation
+              Evaluation Criteria for Relocation Priority
             </span>
             <span className="font-mono text-slate-600">{activeSettlement.population.toLocaleString()} Residents ({activeSettlement.households} Households)</span>
           </div>
           <p className="text-slate-700 leading-relaxed">
-            <b>Statutory Trigger:</b> {activeSettlement.redZoneOverlapPct}% overlap with statutory Permanent Unsuitability Red Zone (NGT Riverbed 'O' Zone). Water reached 208.66m MSL in July 2023, completely submerging dwellings under 3.5m+ floodwaters. No permanent structural flood bund exists or is permissible under environmental law.
+            <b>Relocation Trigger:</b> {activeSettlement.redZoneOverlapPct}% overlap with Permanent Unsuitability Red Zone (NGT Riverbed 'O' Zone). Water reached 208.66m MSL in July 2023, completely submerging dwellings under 3.5m+ floodwaters. No permanent structural flood bund exists or is permissible under environmental law.
           </p>
         </div>
 
@@ -152,7 +152,7 @@ export const RecommendationsModule: React.FC<RecommendationsModuleProps> = ({
             <div className="space-y-1.5 text-xs pt-1">
               <span className="font-bold text-slate-900 uppercase text-[11px] tracking-wider block">Why This Recommendation?</span>
               <ul className="space-y-1 text-slate-700 list-disc list-inside leading-relaxed">
-                <li><b>Statutory Imperative:</b> {activeSettlement.name} is designated permanently uninhabitable under DM Act Section 30(2).</li>
+                <li><b>Hazard Imperative:</b> {activeSettlement.name} is located inside the Permanent Unsuitability Red Zone with repeated deep-submersion history.</li>
                 <li><b>Proximity & Livelihood Continuity:</b> {recommendedSite.name.split('—')[0]} is within {activeAssignment.distanceKm.toFixed(1)} km, preserving municipal transit access and employment linkages.</li>
                 <li><b>Carrying Capacity Certification:</b> The site's safe capacity ({recommendedSite.calculatedCapacity.netSafeAbsorptionCapacityHH} HH) safely absorbs the {activeAssignment.capacityUtilizedHH} HH quota without resource oversubscription.</li>
                 <li><b>Bottleneck Verification:</b> Governing bottleneck ({recommendedSite.calculatedCapacity.bindingConstraint}) has been checked against DJB / PWD registers and remains within certified limits.</li>
@@ -244,11 +244,11 @@ export const RecommendationsModule: React.FC<RecommendationsModuleProps> = ({
           </div>
         </div>
 
-        {/* Legal Disclaimer */}
-        <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 flex items-start gap-2.5 text-xs text-amber-900">
-          <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+        {/* Decision Support Note */}
+        <div className="p-3 rounded-lg bg-blue-50 border border-blue-200 flex items-start gap-2.5 text-xs text-blue-950">
+          <AlertTriangle className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
           <p className="leading-relaxed">
-            <b>Statutory Notice:</b> Generated under the DDMA / SURAKSHA Decision Protocol. Land allotment, budgetary sanctions, and gazette de-notification require final ratification by the Delhi Disaster Management Authority chaired by the Hon'ble Lieutenant Governor of Delhi.
+            <b>Decision Support Note:</b> Generated by SURAKSHA analytical engine for relocation planning and comparative evaluation.
           </p>
         </div>
       </div>

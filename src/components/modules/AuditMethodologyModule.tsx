@@ -21,13 +21,13 @@ export const AuditMethodologyModule: React.FC = () => {
       <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-xs">
         <div className="flex items-center gap-2 text-xs font-bold text-blue-900 uppercase tracking-wider">
           <History className="w-4 h-4 text-blue-700" />
-          <span>Stage 9: Validation, Methodology & Statutory Audit Trail</span>
+          <span>Stage 9: Validation, Methodology & Analytical Audit Trail</span>
         </div>
         <h2 className="text-xl font-black text-slate-900 tracking-tight mt-1">
           Multi-Source Data Validation, Decision Methodology & Audit Ledger
         </h2>
         <p className="text-xs text-slate-600 max-w-4xl mt-1 leading-relaxed">
-          Government decisions must withstand judicial review, legislative audit, and public scrutiny. SURAKSHA guarantees total transparency: decisions are not derived from a single black-box dataset, but cross-validated across statutory agencies (CWC, Survey of India, DJB, PWD, UDISE+, Revenue Dept) with verifiable mathematical formulations.
+          Relocation decisions demand rigorous verification and transparency. SURAKSHA guarantees total auditability: decisions are not derived from a single black-box dataset, but cross-validated across benchmark agencies (CWC, Survey of India, DJB, PWD, UDISE+, Census) with verifiable mathematical formulations.
         </p>
       </div>
 
@@ -35,10 +35,10 @@ export const AuditMethodologyModule: React.FC = () => {
       <div className="bg-white rounded-xl border border-slate-200 p-5 space-y-3 shadow-xs">
         <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
           <Scale className="w-4 h-4 text-blue-700" />
-          <span>Statutory Framework: Permanent Relocation vs Emergency Response</span>
+          <span>Conceptual Framework: Permanent Relocation vs Emergency Response</span>
         </div>
         <p className="text-xs text-slate-600">
-          SURAKSHA is specifically engineered for long-term habitational sustainability under Section 30(2) of the Disaster Management Act 2005:
+          SURAKSHA is specifically engineered for long-term habitational sustainability and disaster risk reduction:
         </p>
 
         <div className="overflow-x-auto">
@@ -102,7 +102,7 @@ export const AuditMethodologyModule: React.FC = () => {
               <tr>
                 <th className="py-2.5 px-3">Validation Check</th>
                 <th className="py-2.5 px-3">Domain</th>
-                <th className="py-2.5 px-3">Statutory Sources Cross-Compared</th>
+                <th className="py-2.5 px-3">Benchmark Sources Cross-Compared</th>
                 <th className="py-2.5 px-3">Verification Detail</th>
                 <th className="py-2.5 px-3">Variance Metric</th>
                 <th className="py-2.5 px-3">Status</th>
@@ -198,7 +198,7 @@ export const AuditMethodologyModule: React.FC = () => {
       <div className="bg-white rounded-xl border border-slate-200 p-4 space-y-3 shadow-xs">
         <div className="flex items-center gap-2 font-bold text-sm text-slate-900">
           <Database className="w-4 h-4 text-blue-700" />
-          <span>Statutory Data Sources & Official Portals</span>
+          <span>Benchmark Data Sources & Agency Portals</span>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
@@ -207,7 +207,7 @@ export const AuditMethodologyModule: React.FC = () => {
                 <th className="py-2.5 px-3">Source Agency</th>
                 <th className="py-2.5 px-3">Dataset Domain</th>
                 <th className="py-2.5 px-3">Usage in Platform</th>
-                <th className="py-2.5 px-3">Official Portal</th>
+                <th className="py-2.5 px-3">Agency Portal</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200 text-slate-700">

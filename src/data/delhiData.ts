@@ -2,7 +2,7 @@ import { Settlement, CandidateSite, RedZoneVersionData, DataConfidenceInfo, Vali
 
 /**
  * SURAKSHA DISASTER RELOCATION DECISION-SUPPORT PLATFORM
- * Operational Jurisdiction: East Delhi & Trans-Yamuna District (DDMA / Govt of NCT of Delhi)
+ * Operational Focus: East Delhi & Trans-Yamuna Region (Surajmal Vihar / Yamuna Basin)
  * Reference Anchor: University School of Automation and Robotics (USAR), GGSIPU East Delhi Campus, Surajmal Vihar / Karkardooma / Yamuna Floodplain Basin
  */
 
@@ -54,7 +54,7 @@ export const SETTLEMENTS_DATA: Settlement[] = [
     },
     keyRiskDrivers: [
       'Record 2023 flood overtopping (208.66m MSL) submerging dwellings under 3.8m floodwaters',
-      'Location inside statutory NGT Riverbed "O" Zone with zero physical flood protection bunding',
+      'Location inside NGT Riverbed "O" Zone with zero physical flood protection bunding',
       'Saturated sandy-silt foundation prone to total structural scouring and liquefaction',
       'Single emergency evacuation corridor via railway bridge underpass prone to immediate waterlogging'
     ],
@@ -66,13 +66,13 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       slopeInstability: 96
     },
     explanation: {
-      summary: 'Ranked #1 Priority for immediate permanent relocation due to triple catastrophic flood recurrence, 100% location inside statutory NGT Riverbed "O" Zone, and total absence of flood bunding.',
+      summary: 'Ranked #1 Priority for immediate permanent relocation due to triple catastrophic flood recurrence, 100% location inside NGT Riverbed "O" Zone, and total absence of flood bunding.',
       keyPoints: [
         'Central Water Commission (CWC) telemetry confirms river level exceeded 208.66m in July 2023, overtopping entire habitation by 3.8m.',
         'National Green Tribunal (NGT) Principal Bench orders strictly prohibit any permanent human settlement within active Yamuna floodplains.',
         'Evacuation requires boat rescue across high-velocity mainstem currents during peak monsoon.'
       ],
-      statutoryJustification: 'Mandated under Section 30(2)(v) of Disaster Management Act 2005 read with NGT River Yamuna Preservation Orders.'
+      statutoryJustification: 'Prioritized under Disaster Management Guidelines read with NGT River Yamuna Preservation Orders.'
     }
   },
   {
@@ -125,13 +125,13 @@ export const SETTLEMENTS_DATA: Settlement[] = [
       slopeInstability: 88
     },
     explanation: {
-      summary: 'Ranked #2 Priority due to direct unbunded exposure to high-velocity flood runoff. 94% of the built-up cluster lies within the statutory Red Zone.',
+      summary: 'Ranked #2 Priority due to direct unbunded exposure to high-velocity flood runoff. 94% of the built-up cluster lies within the Permanent Red Zone.',
       keyPoints: [
         'Riverbed silt deposition has elevated surrounding ground, causing permanent ponding during normal rains.',
         'Dense population (2,940 residents) creates severe humanitarian exposure during nighttime barrage water releases.',
         'Zero motorable access during monsoon alerts.'
       ],
-      statutoryJustification: 'Designated for habitational de-densification under Delhi Disaster Management Authority Plan.'
+      statutoryJustification: 'Designated for habitational de-densification under Flood Hazard Mitigation Guidelines.'
     }
   },
   {
@@ -303,7 +303,7 @@ export const SETTLEMENTS_DATA: Settlement[] = [
         'Eligible for prioritized PWD bund reinforcement in Phase 1 and voluntary relocation in Phase 2.',
         'Ordered multi-year transition feasible.'
       ],
-      statutoryJustification: 'Monitored under DDMA Watchlist as per National Disaster Management Guidelines.'
+      statutoryJustification: 'Monitored under Floodplain Watchlist as per National Disaster Management Guidelines.'
     }
   }
 ];
@@ -672,7 +672,7 @@ export const RED_ZONE_VERSIONS: Record<'v1.0-2024' | 'v2.0-2025', RedZoneVersion
     version: 'v1.0-2024' as any,
     label: 'Version 1.0 (Pre-Monsoon Jan 2024 Baseline)',
     date: '15 January 2024',
-    gazetteNotification: 'DDMA/DEL/GZ-2024/091',
+    gazetteNotification: 'Reference: SURAKSHA-DEL-RZ-2024-01',
     totalAreaSqKm: 18.5,
     habitationsCondemned: 2,
     populationExposed: 5200,
@@ -698,7 +698,7 @@ export const RED_ZONE_VERSIONS: Record<'v1.0-2024' | 'v2.0-2025', RedZoneVersion
     version: 'v2.0-2025' as any,
     label: 'Version 2.0 (Post-July 2023 Floods Comprehensive Reassessment)',
     date: '02 January 2025',
-    gazetteNotification: 'DDMA/DEL/GZ-2025/018-AMENDED',
+    gazetteNotification: 'Reference: SURAKSHA-DEL-RZ-2025-02',
     totalAreaSqKm: 31.2,
     habitationsCondemned: 4,
     populationExposed: 12240,
@@ -706,9 +706,9 @@ export const RED_ZONE_VERSIONS: Record<'v1.0-2024' | 'v2.0-2025', RedZoneVersion
       'Recurrence: Exceeded CWC Extreme Flood Level (crossing 208.66m in July 2023)',
       'Submersion Depth: Lowlands inundated under >3.5m floodwaters for >5 consecutive days',
       'Embankment Vulnerability: Seepage, drainage backflow, and earthen bund breach corridors',
-      'Statutory River Yamuna Preservation Zone ("O" Zone) permanent non-habitation declaration'
+      'River Yamuna Preservation Zone ("O" Zone) permanent non-habitation criteria'
     ],
-    reassessmentSummary: 'Comprehensive multi-agency reassessment (DDMA, CWC, Delhi Irrigation & Flood Control Dept, NGT High Committee) following the unprecedented July 2023 floods. Expanded by +12.7 sq.km to encompass Garhi Mandu, Shastri Park lowlands, and Yamuna Khadar floodway reaches up to Ring Road / Vikas Marg embankments.',
+    reassessmentSummary: 'Comprehensive multi-agency reassessment (CWC, Delhi Irrigation & Flood Control Dept, NGT High Committee) following the unprecedented July 2023 floods. Expanded by +12.7 sq.km to encompass Garhi Mandu, Shastri Park lowlands, and Yamuna Khadar floodway reaches up to Ring Road / Vikas Marg embankments.',
     polygonRings: [
       [
         [28.6450, 77.2480],
@@ -735,7 +735,7 @@ export const DATA_CONFIDENCE_METRICS: DataConfidenceInfo = {
   domains: {
     'population': {
       rating: 'High',
-      source: 'DDMA Door-to-Door Geo-tagging & Delhi Electoral Roll (2024)',
+      source: 'Field Door-to-Door Geo-tagging & Delhi Electoral Roll (2024)',
       lastUpdated: 'Q4 2025',
       completenessPct: 96,
       notes: 'Physical biometric enumeration cross-checked with electoral register numbers.'
@@ -776,7 +776,7 @@ export const DATA_VALIDATION_CHECKS: ValidationCheck[] = [
     id: 'VAL-01',
     checkName: 'Population Demographic Triangulation',
     domain: 'Demographics',
-    sourcesCompared: ['Census 2011 Enumeration', 'Special Summary Electoral Roll 2024', 'DDMA Field Door-to-Door Survey'],
+    sourcesCompared: ['Census 2011 Enumeration', 'Special Summary Electoral Roll 2024', 'Field Enumeration & Satellite Survey'],
     status: 'PASS',
     details: 'Population variance between electoral voter registration and field household headcount is within 3.4% acceptable tolerance.',
     varianceMetric: '3.4% delta (Pass < 5.0%)'
@@ -814,7 +814,7 @@ export const DATA_VALIDATION_CHECKS: ValidationCheck[] = [
     domain: 'Carrying Capacity',
     sourcesCompared: ['Delhi Jal Board Bhagirathi WTP Allocation', 'BSES Yamuna Power Distribution Load Ledger', 'PWD Road RoW Registry'],
     status: 'PASS',
-    details: 'Infrastructure headroom numbers verified by inter-agency nodal officers under NCT of Delhi Disaster Management Committee.',
+    details: 'Infrastructure headroom numbers verified by inter-agency technical standards.',
     varianceMetric: 'Multi-Agency Certified'
   }
 ];
@@ -824,7 +824,7 @@ export const MULTI_HAZARD_LAYERS_CONFIG = [
   { id: 'khadar_surge', name: 'Active Floodplain Khadar Surge Runout Corridor', color: '#ea580c', opacity: 0.45, active: true },
   { id: 'drain_backflow', name: 'Embankment Seepage & Siphon Backflow Zone', color: '#d97706', opacity: 0.4, active: false },
   { id: 'silt_liquefaction', name: 'Saturated Alluvial Soil Liquefaction Zone', color: '#b45309', opacity: 0.35, active: false },
-  { id: 'red_zone', name: 'Statutory Permanent Unsuitability Red Zone (NGT O-Zone)', color: '#b91c1c', opacity: 0.6, active: true },
+  { id: 'red_zone', name: 'Permanent Unsuitability Red Zone (NGT O-Zone)', color: '#b91c1c', opacity: 0.6, active: true },
   { id: 'candidate_sites', name: 'Candidate Resettlement Sites (Karkardooma / Mandoli / Anand Vihar)', color: '#15803d', opacity: 0.7, active: true },
   { id: 'allocation_routes', name: 'Relocation Assignment Corridors', color: '#1d4ed8', opacity: 0.85, active: true },
 ];

@@ -39,7 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { id: 'candidates' as ActiveTab, label: '5. Candidate Resettlement Sites', icon: MapPin, badge: '5 Parcels (1 Rej)' },
     { id: 'capacity' as ActiveTab, label: '6. Carrying Capacity Engine', icon: Gauge, badge: 'Sanitation + Min-Op', isHighlight: true },
     { id: 'allocation' as ActiveTab, label: '7. Population-Site Matching', icon: GitMerge, badge: 'Constrained' },
-    { id: 'recommendations' as ActiveTab, label: '8. Explainable Decision Brief', icon: FileCheck, badge: 'DDMA Ready' },
+    { id: 'recommendations' as ActiveTab, label: '8. Explainable Decision Brief', icon: FileCheck, badge: 'Decision Ready' },
     { id: 'audit' as ActiveTab, label: '9. Validation & Audit Trail', icon: History, badge: 'Cross-Source' },
   ];
 

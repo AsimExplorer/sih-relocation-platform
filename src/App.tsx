@@ -9,7 +9,6 @@ import { ActiveTab } from './types';
 
 // Layout Components
 import { Header } from './components/layout/Header';
-import { Sidebar } from './components/layout/Sidebar';
 import { GuidedTour, TOUR_STEPS } from './components/layout/GuidedTour';
 
 // Module Views
@@ -80,12 +79,11 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
-      {/* 1. Government Header */}
+      {/* 1. Header */}
       <Header
         currentRedZoneVersion={activeRedZoneVersion}
         onToggleDemoMode={handleToggleDemoMode}
         isDemoMode={isDemoMode}
-        onOpenReportModal={() => setIsReportModalOpen(true)}
         activeTab={activeTab}
         onSelectTab={setActiveTab}
       />
@@ -102,25 +100,10 @@ export function App() {
         />
       )}
 
-      {/* 3. Main Operational Workspace */}
+      {/* 3. Main Operational Workspace (Full Width) */}
       <div className="flex-1 flex max-w-[1920px] w-full mx-auto overflow-hidden">
-        {/* Left Sidebar Nav */}
-        <Sidebar
-          activeTab={activeTab}
-          onSelectTab={(tab) => {
-            setActiveTab(tab);
-            if (isDemoMode) {
-              const matchedStep = TOUR_STEPS.findIndex(s => s.tab === tab);
-              if (matchedStep !== -1) setDemoStep(matchedStep + 1);
-            }
-          }}
-          immediateCount={immediateCount}
-          totalVulnerablePop={totalVulnerablePop}
-          totalSafeCapacityHH={totalSafeCapacityHH}
-        />
-
-        {/* Central View Content */}
-        <main className="flex-1 p-4 overflow-y-auto bg-slate-50">
+        {/* Central View Content - 100% Width */}
+        <main className="flex-1 p-4 md:p-6 overflow-y-auto bg-slate-50 w-full">
           {activeTab === 'overview' && (
             <OverviewModule
               settlements={SETTLEMENTS_DATA}

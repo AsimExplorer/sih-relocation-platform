@@ -65,7 +65,7 @@ export function compareSettlements(a: Settlement, b: Settlement): {
     differentials.push('Higher historical catastrophe recurrence (+' + (winner.factors.hazardRecurrence - loser.factors.hazardRecurrence) + ' pts)');
   }
   if (winner.factors.redZoneOverlap > loser.factors.redZoneOverlap) {
-    differentials.push('Greater statutory Red Zone overlap (' + winner.redZoneOverlapPct + '% vs ' + loser.redZoneOverlapPct + '%)');
+    differentials.push('Greater Red Zone overlap (' + winner.redZoneOverlapPct + '% vs ' + loser.redZoneOverlapPct + '%)');
   }
   if (winner.factors.accessibilityRisk > loser.factors.accessibilityRisk) {
     differentials.push('Severe lifeline severance / bridge islanding risk (' + winner.factors.accessibilityRisk + '/100 vs ' + loser.factors.accessibilityRisk + '/100)');

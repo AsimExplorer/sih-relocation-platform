@@ -24,13 +24,13 @@ export const TOUR_STEPS = [
     tab: 'hazard' as ActiveTab,
     title: 'Step 2: Inspect Multi-Hazard Floodplain Inundation & Silt Scour',
     narrative: 'Examine multi-hazard triggers: 208.66m all-time record Yamuna water level, unbunded floodplain surge corridors, and Hathnikund discharge (>3.5 lakh cusecs).',
-    keyTakeaway: 'Standard systems stop at flood depth contours. Our platform feeds this into statutory permanent unsuitability zoning.'
+    keyTakeaway: 'Standard systems stop at flood depth contours. Our platform feeds this into permanent unsuitability zoning.'
   },
   {
     step: 3,
     tab: 'redzone' as ActiveTab,
-    title: 'Step 3: Activate Statutory Permanent Unsuitability Red Zone (v2.0)',
-    narrative: 'Permanent prohibition under DM Act Section 30(2) & NGT Yamuna Conservation Orders: area declared permanently unsuitable for habitation.',
+    title: 'Step 3: Activate Permanent Unsuitability Red Zone (v2.0)',
+    narrative: 'Demarcated based on flood safety and NGT Yamuna conservation benchmarks: area categorized as permanently unsuitable for human habitation.',
     keyTakeaway: 'Notice version reassessment: v1 (18.5 sq.km, Jan 2024) expanded to v2 (31.2 sq.km, Jan 2025) post-July 2023 flood overtopping.'
   },
   {
@@ -38,13 +38,13 @@ export const TOUR_STEPS = [
     tab: 'settlements' as ActiveTab,
     title: 'Step 4: Inspect Vulnerable Settlement (Yamuna Khadar East / Garhi Mandu)',
     narrative: 'Click on Yamuna Khadar East: 3,850 population, 100% Red Zone overlap, 3 catastrophic flood recurrences, and zero protective bunding.',
-    keyTakeaway: 'Immediate relocation priority with formal statutory de-notification justification.'
+    keyTakeaway: 'Immediate relocation priority with formal technical justification.'
   },
   {
     step: 5,
     tab: 'candidates' as ActiveTab,
     title: 'Step 5: Review Candidate Relocation Sites (Suitability Scoring)',
-    narrative: 'Evaluate 4 candidate resettlement parcels (Site Alpha - Karkardooma near USAR, Site Beta - Mandoli, Site Gamma - Anand Vihar/Ghazipur, Site Delta - Bakkarwala).',
+    narrative: 'Evaluate 5 candidate resettlement parcels (Site Alpha - Karkardooma near USAR, Site Beta - Mandoli, Site Gamma - Anand Vihar, Site Delta - Bakkarwala, Site Epsilon - Disqualified).',
     keyTakeaway: 'Suitability scores (79-88/100) evaluate flood safety, road connectivity, and institutional buffers.'
   },
   {
@@ -52,7 +52,7 @@ export const TOUR_STEPS = [
     tab: 'capacity' as ActiveTab,
     title: 'Step 6: FLAGSHIP — Site Carrying Capacity & Binding Constraints',
     narrative: 'Inspect Site Alpha (Karkardooma / USAR Hub): Land allows 820 households, but Safe Absorption Capacity is strictly capped at 620 households! Why? Delhi Jal Board (DJB) water pipeline capacity is the Binding Constraint.',
-    keyTakeaway: 'Deterministic min-operator: Safe Capacity = min(Land, Water, Road, Health, School). Transparent and non-blackbox.'
+    keyTakeaway: 'Deterministic min-operator: Safe Capacity = min(Land, Water, Road, Health, School, Sanitation). Transparent and non-blackbox.'
   },
   {
     step: 7,
@@ -64,16 +64,16 @@ export const TOUR_STEPS = [
   {
     step: 8,
     tab: 'recommendations' as ActiveTab,
-    title: 'Step 8: DDMA Government-Grade Decision Brief',
-    narrative: 'Review formal DDMA executive brief: specific reasons for selection, alternatives rejected, confidence metrics (95.4%), and statutory sign-off block.',
-    keyTakeaway: 'No vague AI chatbot claims; audit-ready administrative documentation.'
+    title: 'Step 8: Executive Relocation Decision Brief',
+    narrative: 'Review synthesized relocation brief: specific reasons for selection, alternatives rejected, confidence metrics (88%), and comparative evaluation.',
+    keyTakeaway: 'Audit-ready, deterministic decision support with explicit mathematical rationale.'
   },
   {
     step: 9,
     tab: 'audit' as ActiveTab,
     title: 'Step 9: Audit Trail, Provenance & Methodology Verification',
-    narrative: 'Inspect the cryptographic audit ledger, CWC / DJB / PWD / NGT data provenance, and published gazette notifications.',
-    keyTakeaway: 'Accountable government decision support from flood risk to sustainable resettlement.'
+    narrative: 'Inspect the transparent audit ledger, multi-source agency benchmarks (CWC / DJB / PWD / NGT), and reference records.',
+    keyTakeaway: 'Accountable decision support from flood risk assessment to sustainable resettlement.'
   }
 ];
 
@@ -97,7 +97,7 @@ export const GuidedTour: React.FC<GuidedTourProps> = ({
             <div className="flex items-center gap-2">
               <span className="text-xs font-extrabold text-blue-900 uppercase tracking-wider flex items-center gap-1">
                 <Sparkles className="w-3 h-3 text-amber-600" />
-                Hackathon Presentation Walkthrough (Step {current.step} of {totalSteps})
+                Interactive Guided Tour (Step {current.step} of {totalSteps})
               </span>
               <span className="text-[10px] text-blue-800 font-mono bg-blue-100 px-1.5 py-0.5 rounded border border-blue-300 font-semibold">
                 {current.tab.toUpperCase()}

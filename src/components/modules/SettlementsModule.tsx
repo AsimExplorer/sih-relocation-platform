@@ -195,9 +195,9 @@ export const SettlementsModule: React.FC<SettlementsModuleProps> = ({
               </div>
             </div>
 
-            {/* Statutory Recommendation */}
+            {/* Action Plan */}
             <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-xs">
-              <span className="font-bold text-red-900 block uppercase text-[10px]">Statutory Action</span>
+              <span className="font-bold text-red-900 block uppercase text-[10px]">Action Plan</span>
               <span className="text-slate-900 font-semibold">{selected.recommendedAction}</span>
               <div className="text-[10px] text-slate-600 mt-1">{selected.explanation.statutoryJustification}</div>
             </div>

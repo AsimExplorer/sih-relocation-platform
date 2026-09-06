@@ -31,7 +31,7 @@ export const MapLegend: React.FC<MapLegendProps> = ({ layers, onToggleLayer }) =
             <label className="flex items-center justify-between text-slate-700 hover:text-slate-950 cursor-pointer select-none">
               <span className="flex items-center gap-2">
                 <span className="w-3.5 h-3.5 rounded bg-red-100 border-2 border-red-600 inline-block shrink-0" />
-                Statutory Red Zone (NGT O-Zone)
+                Permanent Red Zone (NGT O-Zone)
               </span>
               <input 
                 type="checkbox" 
@@ -96,7 +96,7 @@ export const MapLegend: React.FC<MapLegendProps> = ({ layers, onToggleLayer }) =
 
           <div className="text-[11px] text-slate-500 flex items-center gap-1.5 pt-0.5">
             <ShieldAlert className="w-3.5 h-3.5 text-red-600 shrink-0" />
-            <span>Red Zone = Statutory Non-Habitation Zone (DM Act Sec 30(2)).</span>
+            <span>Red Zone = Permanent Non-Habitation Zone (NGT 'O' Zone).</span>
           </div>
         </div>
       )}

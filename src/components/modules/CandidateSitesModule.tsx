@@ -200,14 +200,14 @@ export const CandidateSitesModule: React.FC<CandidateSitesModuleProps> = ({
         })}
       </div>
 
-      {/* SELECTED SITE DETAILED EVALUATION DOSSIER */}
+      {/* SELECTED SITE DETAILED EVALUATION PROFILE */}
       {selected && (
         <div className="p-5 rounded-xl bg-white border border-slate-200 space-y-4 shadow-xs">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-slate-200">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Candidate Sector In-Depth Dossier</span>
+                <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">Candidate Sector In-Depth Evaluation Profile</span>
                 <span className={`text-xs px-2.5 py-0.5 rounded-full font-black border uppercase tracking-wider ${
                   selected.status === 'REJECTED' 
                     ? 'bg-red-100 text-red-900 border-red-300'

@@ -66,7 +66,7 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
               From Yamuna Flood Inundation to Sustainable Permanent Resettlement
             </h2>
             <p className="text-xs text-slate-600 max-w-4xl mt-1 leading-relaxed">
-              SURAKSHA fundamentally differentiates <b>Permanent Relocation Planning</b> from temporary relief camps. It establishes statutory habitational unsuitability for active floodplain clusters, determines transparent relocation priority, calculates sustainable carrying capacity across 6 municipal resources (including Sanitation), rejects parcels with fatal bottlenecks, and matches displaced families into safe urban sectors (including the Surajmal Vihar / USAR corridor).
+              SURAKSHA fundamentally differentiates <b>Permanent Relocation Planning</b> from temporary relief camps. It establishes habitational unsuitability for active floodplain clusters, determines transparent relocation priority, calculates sustainable carrying capacity across 6 municipal resources (including Sanitation), rejects parcels with fatal bottlenecks, and matches displaced families into safe urban sectors (including the Surajmal Vihar / USAR corridor).
             </p>
           </div>
 
@@ -261,8 +261,8 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
           {/* Quick Nav Card */}
           <div className="p-3.5 rounded-xl bg-white border border-slate-200 text-xs flex items-center justify-between shadow-sm">
             <div>
-              <span className="font-bold text-slate-900 block">Official DDMA Decision Brief</span>
-              <span className="text-[11px] text-slate-500">Government of NCT of Delhi</span>
+              <span className="font-bold text-slate-900 block">Executive Decision Brief</span>
+              <span className="text-[11px] text-slate-500">Stage 8 Relocation Evaluation</span>
             </div>
             <button
               onClick={() => onNavigate('recommendations')}

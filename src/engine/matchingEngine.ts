@@ -144,7 +144,7 @@ export function solveCapacityConstrainedAllocation(
         remainingCapacityHH: newRemaining,
         bindingConstraint: site.calculatedCapacity.bindingConstraint,
         rationale: [
-          'Matched under statutory priority ' + st.priority.toUpperCase() + ' mandate (DM Act Section 30).',
+          'Matched under priority ' + st.priority.toUpperCase() + ' criteria.',
           'Optimal transit connectivity (' + selected.dist.toFixed(1) + ' km / ~' + travelTimeMinutes + ' min via PWD corridor).',
           'High composite suitability rating (' + site.suitabilityScore + '/100) with zero active floodway hazard.',
           'Sustainable capacity verified: ' + allocatedHH + ' HH absorbed, ' + newRemaining + ' HH safe headroom remaining.',

@@ -188,7 +188,7 @@ export const MultiHazardModule: React.FC = () => {
               Risk_Score = 0.25 × Flood_Risk + 0.20 × Liquefaction + 0.15 × Backflow + 0.15 × Vulnerability + 0.15 × Recurrence + 0.10 × Impedance
             </div>
             <p className="mt-1 text-[11px]">
-              Every weight is statutory-derived from the Delhi Disaster Management Plan (DDMP). No heuristic or opaque machine-learning weights are utilized in habitational condemnation scoring.
+              Every weight is derived from regional disaster management and hydrological risk criteria. No heuristic or opaque machine-learning weights are utilized in habitational risk scoring.
             </p>
           </div>
         </div>
@@ -232,7 +232,7 @@ export const MultiHazardModule: React.FC = () => {
           </div>
         </div>
         <p className="text-[10px] text-slate-500 italic">
-          Notice: Prototype demonstration metrics calibrated to official Central Water Commission and Delhi Disaster Management Authority baselines.
+          Notice: Risk metrics calibrated to Central Water Commission and regional hydrological baselines.
         </p>
       </div>
 
@@ -243,7 +243,7 @@ export const MultiHazardModule: React.FC = () => {
             <Layers className="w-4 h-4 text-blue-700" />
             Configured Multi-Hazard Spatial Layers
           </span>
-          <span className="text-xs text-slate-500 font-normal">Integrated from CWC, DDMA & Irrigation Dept</span>
+          <span className="text-xs text-slate-500 font-normal">Integrated from CWC, PWD & Irrigation Dept</span>
         </div>
 
         <div className="overflow-x-auto">
@@ -267,7 +267,7 @@ export const MultiHazardModule: React.FC = () => {
                     />
                     {layer.name}
                   </td>
-                  <td className="py-2.5 px-3 text-slate-600 font-mono">CWC / DDMA / I&FC</td>
+                  <td className="py-2.5 px-3 text-slate-600 font-mono">CWC / Irrigation & Flood Control</td>
                   <td className="py-2.5 px-3 font-mono">1:5,000 Cadastral</td>
                   <td className="py-2.5 px-3">
                     <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">

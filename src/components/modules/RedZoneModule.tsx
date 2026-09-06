@@ -18,24 +18,24 @@ export const RedZoneModule: React.FC<RedZoneModuleProps> = ({
 
   return (
     <div className="space-y-4">
-      {/* Executive Statutory Banner */}
+      {/* Executive Banner */}
       <div className="p-5 rounded-xl bg-white border border-red-200 shadow-sm">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold uppercase tracking-wider text-red-700 flex items-center gap-1.5">
                 <Ban className="w-4 h-4" />
-                Statutory Red Zone — Permanent Habitation Prohibition
+                Permanent Unsuitability Red Zone — Demarcation Analysis
               </span>
               <span className="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded font-mono font-semibold border border-red-200">
-                DM Act 2005 Sec 30(2) & NGT 'O' Zone
+                Evaluation Framework & NGT 'O' Zone
               </span>
             </div>
             <h2 className="text-xl font-black text-slate-900 tracking-tight mt-1">
               "Area Declared Permanently Unsuitable for Human Habitation"
             </h2>
             <p className="text-xs text-slate-600 max-w-4xl mt-1 leading-relaxed">
-              This is fundamentally different from a temporary monsoonal flood evacuation order. A Permanent Red Zone is an irrevocable statutory land-use designation establishing that permanent habitation within the active Yamuna riverbed ('O' Zone) is ecologically and structurally unviable.
+              This is fundamentally different from a temporary monsoonal flood evacuation order. A Permanent Red Zone is a definitive spatial designation establishing that permanent habitation within the active Yamuna riverbed ('O' Zone) is ecologically and structurally unviable.
             </p>
           </div>
 
@@ -110,7 +110,7 @@ export const RedZoneModule: React.FC<RedZoneModuleProps> = ({
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="text-xs font-bold text-red-900 uppercase tracking-wider">{v2.label}</span>
-                <span className="text-[10px] bg-red-100 text-red-800 font-bold px-1.5 py-0.5 rounded border border-red-200">LATEST GAZETTE</span>
+                <span className="text-[10px] bg-red-100 text-red-800 font-bold px-1.5 py-0.5 rounded border border-red-200">AMENDED DELINEATION</span>
               </div>
               <div className="text-xs text-slate-500 font-mono mt-0.5">{v2.gazetteNotification}</div>
             </div>
@@ -137,11 +137,11 @@ export const RedZoneModule: React.FC<RedZoneModuleProps> = ({
         </div>
       </div>
 
-      {/* Statutory Criteria List */}
+      {/* Technical Criteria List */}
       <div className="p-4 rounded-xl bg-white border border-slate-200 space-y-3 shadow-sm">
         <div className="flex items-center gap-2 font-bold text-sm text-slate-900">
           <FileText className="w-4 h-4 text-red-700" />
-          <span>Statutory Criteria for Permanent Red Zone Demarcation</span>
+          <span>Technical Criteria for Permanent Red Zone Demarcation</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
           {currentVersion.criteria.map((c, i) => (

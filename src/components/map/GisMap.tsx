@@ -57,7 +57,7 @@ export const GisMap: React.FC<GisMapProps> = ({
 
     // Official OpenStreetMap standard public tiles - 100% free, reliable, no API key required, zero watermarks!
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Delhi Disaster Management Authority (DDMA)',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 19,
     }).addTo(map);
 
@@ -105,7 +105,7 @@ export const GisMap: React.FC<GisMapProps> = ({
       ).addTo(group);
     }
 
-    // 2. Statutory Permanent Unsuitability Red Zone (NGT Riverbed "O" Zone)
+    // 2. Permanent Unsuitability Red Zone (NGT Riverbed "O" Zone)
     if (layers.redZone) {
       activeRedZoneVersion.polygonRings.forEach(ring => {
         const redPoly = L.polygon(ring, {
@@ -118,10 +118,10 @@ export const GisMap: React.FC<GisMapProps> = ({
         redPoly.bindTooltip(
           `<div class="p-1 font-sans">
             <div class="text-xs font-bold text-red-700 flex items-center gap-1">
-              <span>⚠️ STATUTORY PERMANENT UNSUITABILITY RED ZONE</span>
+              <span>⚠️ PERMANENT UNSUITABILITY RED ZONE</span>
             </div>
             <div class="text-xs font-semibold text-slate-900 mt-0.5">${activeRedZoneVersion.label}</div>
-            <div class="text-[11px] text-slate-600 mt-0.5">Area: ${activeRedZoneVersion.totalAreaSqKm} sq.km | Section 30(2) DM Act 2005 / NGT "O" Zone</div>
+            <div class="text-[11px] text-slate-600 mt-0.5">Area: ${activeRedZoneVersion.totalAreaSqKm} sq.km | NGT "O" Zone Riverbed Demarcation</div>
             <div class="text-[11px] text-red-800 font-semibold mt-0.5">Habitations inside: Yamuna Khadar East, Garhi Mandu, Bela Estate</div>
           </div>`,
           { sticky: true }

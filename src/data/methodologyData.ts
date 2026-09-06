@@ -6,19 +6,19 @@ export const METHODOLOGY_SECTIONS = [
     formula: 'Risk Score = (0.35 × Flood Recurrence) + (0.25 × Red Zone Overlap) + (0.15 × Exposed Population) + (0.15 × Embankment / Drainage Backflow Risk) + (0.10 × Silt Liquefaction Scour)',
     indicators: [
       { name: 'Flood Recurrence (0-100)', source: 'Central Water Commission (CWC) Yamuna River Gauges', weight: '35%' },
-      { name: 'Permanent Red Zone Overlap (0-100%)', source: 'Delhi Disaster Management Authority (DDMA) / NGT Riverbed Demarcation', weight: '25%' },
+      { name: 'Permanent Red Zone Overlap (0-100%)', source: 'Riverbed / Floodplain NGT Demarcation', weight: '25%' },
       { name: 'Exposed Population (0-100)', source: 'Census 2011 + District Administration East Delhi Registry', weight: '15%' },
       { name: 'Embankment & Backflow Risk (0-100)', source: 'Irrigation & Flood Control Dept / PWD Delhi', weight: '15%' },
       { name: 'Silt Liquefaction / Foundation Scour Index (0-100)', source: 'Geological Survey of India (GSI) Alluvial Sub-soil Survey', weight: '10%' }
     ]
   },
   {
-    title: '2. Permanent Unsuitability Red Zone Statutory Criteria',
+    title: '2. Permanent Unsuitability Red Zone Technical Criteria',
     code: 'PURZ-DELHI-NGT',
-    description: 'Strict statutory criteria under Section 30(2) of the Disaster Management Act 2005 read with National Green Tribunal (NGT) Principal Bench Orders declaring active Yamuna riverbed floodplains permanently unsuitable for human habitation.',
+    description: 'Strict technical criteria aligned with Disaster Management Guidelines and National Green Tribunal (NGT) Principal Bench Orders designating active Yamuna riverbed floodplains permanently unsuitable for human habitation.',
     criteriaList: [
       'Flood Recurrence: Exceeded CWC Extreme Flood Level (208.66m in July 2023) with direct velocity inundation.',
-      'Statutory Riverbed "O" Zone: Location within prohibited Yamuna river conservation zone where permanent civil structures are forbidden by judicial mandate.',
+      'Riverbed "O" Zone: Location within Yamuna river conservation zone where permanent civil structures are forbidden by environmental regulations.',
       'Drainage Confluence: Intersects unbunded stormwater outfall backflow corridors during high river stages.',
       'Lifeline Fragility: Arterial road approach submerged under >2.5m floodwaters, requiring boat evacuation.',
       'Ground Saturation: Silt table liquefaction and permanent dampness rendering foundations structurally non-viable.'
@@ -67,10 +67,10 @@ export const METHODOLOGY_SECTIONS = [
 ];
 
 export const OFFICIAL_DATA_SOURCES = [
-  { name: 'Delhi Disaster Management Authority (DDMA)', type: 'Statutory Authority', officialUrl: 'delhi.gov.in/ddma', status: 'Operational Guidelines Applied', notes: 'Master Plan for Delhi (MPD) flood management and rehabilitation directives.' },
+  { name: 'Delhi Disaster Management Guidelines', type: 'Framework Baseline', officialUrl: 'delhi.gov.in', status: 'Operational Guidelines Applied', notes: 'Master Plan for Delhi (MPD) flood management and rehabilitation directives.' },
   { name: 'Central Water Commission (CWC)', type: 'Hydrological River Gauges', officialUrl: 'cwc.gov.in', status: 'Calibrated Demonstration Data', notes: 'Old Railway Bridge (Loha Pul) and Delhi Railway Bridge flood level time-series.' },
   { name: 'Delhi Jal Board (DJB)', type: 'Water Supply Standards', officialUrl: 'delhijalboard.delhi.gov.in', status: 'Benchmarks Applied', notes: '135 lpcd domestic norms from Sonia Vihar and Bhagirathi Water Treatment Plants.' },
   { name: 'Delhi Development Authority (DDA)', type: 'Urban Land Planning', officialUrl: 'dda.gov.in', status: 'Cadastral Standards', notes: 'Land-use zoning norms, institutional buffers, and layout plot standards.' },
-  { name: 'National Green Tribunal (NGT)', type: 'Judicial Orders', officialUrl: 'greentribunal.gov.in', status: 'Statutory Reference', notes: 'River Yamuna active floodplain "O" Zone non-habitation orders.' },
+  { name: 'National Green Tribunal (NGT)', type: 'Environmental Directives', officialUrl: 'greentribunal.gov.in', status: 'Benchmark Reference', notes: 'River Yamuna active floodplain "O" Zone non-habitation orders.' },
   { name: 'UDISE+ Directorate of Education Delhi', type: 'Educational Infrastructure', officialUrl: 'edudel.nic.in', status: 'Standards Applied', notes: 'Government Sarvodaya Vidyalaya classroom intake standards in East Delhi.' },
 ];
