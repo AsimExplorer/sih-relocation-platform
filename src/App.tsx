@@ -3,7 +3,7 @@ import {
   SETTLEMENTS_DATA, 
   CANDIDATE_SITES_DATA, 
   RED_ZONE_VERSIONS 
-} from './data/wayanadData';
+} from './data/delhiData';
 import { solveCapacityConstrainedAllocation } from './engine/matchingEngine';
 import { ActiveTab } from './types';
 
@@ -29,7 +29,7 @@ import { OfficialReportModal } from './components/modals/OfficialReportModal';
 
 export function App() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
-  const [redZoneVersionKey, setRedZoneVersionKey] = useState<'v1.0-2025' | 'v2.0-2026'>('v2.0-2026');
+  const [redZoneVersionKey, setRedZoneVersionKey] = useState<'v1.0-2024' | 'v2.0-2025'>('v2.0-2025');
   
   const [selectedSettlementId, setSelectedSettlementId] = useState<string | null>('SET-01');
   const [selectedSiteId, setSelectedSiteId] = useState<string | null>('SITE-01');
@@ -79,8 +79,8 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gov-darkest text-gov-text flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
-      {/* 1. Header */}
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
+      {/* 1. Government Header */}
       <Header
         currentRedZoneVersion={activeRedZoneVersion}
         onToggleDemoMode={handleToggleDemoMode}
@@ -118,7 +118,7 @@ export function App() {
         />
 
         {/* Central View Content */}
-        <main className="flex-1 p-4 overflow-y-auto bg-gov-darkest">
+        <main className="flex-1 p-4 overflow-y-auto bg-slate-50">
           {activeTab === 'overview' && (
             <OverviewModule
               settlements={SETTLEMENTS_DATA}

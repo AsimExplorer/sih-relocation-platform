@@ -15,23 +15,23 @@ export const RecommendationsModule: React.FC<RecommendationsModuleProps> = ({
   return (
     <div className="space-y-4">
       {/* Banner */}
-      <div className="p-4 rounded-xl bg-gov-card border border-gov-border flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+      <div className="p-5 rounded-xl bg-white border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-sm">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
-            <FileCheck className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-xs font-bold text-emerald-800 uppercase tracking-wider">
+            <FileCheck className="w-4 h-4 text-emerald-700" />
             <span>Executive Relocation Directives</span>
           </div>
-          <h2 className="text-xl font-black text-white tracking-tight mt-1">
-            Government Decision Recommendations Briefing
+          <h2 className="text-xl font-black text-slate-900 tracking-tight mt-1">
+            DDMA Decision Recommendations Briefing
           </h2>
-          <p className="text-xs text-slate-300 max-w-3xl mt-1">
-            Formally generated administrative relocation brief for the District Disaster Management Authority (DDMA Wayanad) and KSDMA High Powered Committee.
+          <p className="text-xs text-slate-600 max-w-3xl mt-1">
+            Formally generated administrative relocation brief for the District Disaster Management Authority (DDMA East Delhi) and the State Level Committee, Government of NCT of Delhi.
           </p>
         </div>
 
         <button
           onClick={onOpenReportModal}
-          className="px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-blue-950 shrink-0"
+          className="px-3.5 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0"
         >
           <Printer className="w-4 h-4" />
           <span>Print / Export DDMA Official Brief</span>
@@ -39,62 +39,62 @@ export const RecommendationsModule: React.FC<RecommendationsModuleProps> = ({
       </div>
 
       {/* Official Executive Directive Card */}
-      <div className="p-5 rounded-xl bg-gov-surface border border-gov-border space-y-4 shadow-lg">
-        <div className="flex items-center justify-between pb-3 border-b border-gov-border">
+      <div className="p-5 rounded-xl bg-white border border-slate-200 space-y-4 shadow-sm">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-200">
           <div>
-            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block">
-              OFFICIAL DECISION BRIEF • KSDMA/RELOC/2026/041
+            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest block">
+              OFFICIAL DECISION BRIEF • DDMA/DEL/RELOC/2025/041
             </span>
-            <h3 className="text-base font-extrabold text-white mt-0.5">
-              Recommended Action: Mandate Phased Permanent Relocation of 5 Meppadi Habitations
+            <h3 className="text-base font-extrabold text-slate-900 mt-0.5">
+              Recommended Action: Mandate Phased Permanent Relocation of 5 East Delhi Floodplain Habitations
             </h3>
           </div>
-          <span className="px-2.5 py-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 font-mono font-bold text-xs">
-            CONFIDENCE: 94.2% (GRADE A)
+          <span className="px-2.5 py-1 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono font-bold text-xs">
+            CONFIDENCE: 95.4% (GRADE A)
           </span>
         </div>
 
-        {/* Priority 1 Highlight Box: Mundakkai to Site Alpha */}
-        <div className="p-4 rounded-lg bg-slate-900/90 border border-red-900/60 space-y-2">
+        {/* Priority 1 Highlight Box: Yamuna Khadar to Site Alpha */}
+        <div className="p-4 rounded-lg bg-slate-50 border border-red-200 space-y-2">
           <div className="flex items-center justify-between font-bold text-xs">
-            <span className="text-red-400 flex items-center gap-1.5">
-              <ShieldAlert className="w-4 h-4" />
-              DIRECTIVE 1 (URGENT): Relocate Mundakkai (355 HH / 1,420 Pop) ➔ Site Alpha (Kalpetta East)
+            <span className="text-red-800 flex items-center gap-1.5">
+              <ShieldAlert className="w-4 h-4 text-red-600" />
+              DIRECTIVE 1 (URGENT): Relocate Yamuna Khadar East (770 HH / 3,850 Pop) ➔ Site Alpha (Karkardooma / USAR Hub)
             </span>
-            <span className="text-emerald-400 font-mono">18.4 km / ~46 min transit</span>
+            <span className="text-emerald-800 font-mono">5.2 km / ~18 min transit</span>
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
-            <b>Primary Rationale:</b> 100% overlap with statutory Red Zone v2.0; GSI post-disaster survey confirms irrecoverable crown detachment; Site Alpha possesses high suitability (86/100) and zero debris flow threat. Site Alpha's capacity of 340 HH accommodates the initial phase, with balance absorbed in contiguous extension.
+          <p className="text-xs text-slate-700 leading-relaxed">
+            <b>Primary Rationale:</b> 100% overlap with statutory Red Zone (NGT Riverbed 'O' Zone); 208.66m flood level in July 2023 submerged all 620 dwellings; Site Alpha possesses high suitability (88/100) and zero flood risk. Site Alpha's capacity of 620 HH accommodates the initial phase, with balance absorbed in contiguous Bakkarwala extension.
           </p>
-          <div className="text-[11px] text-slate-400 flex items-center gap-4 pt-1">
-            <span>• Alternatives Rejected: Site Gamma (too distant: 22.8 km); Site Beta (assigned to Chooralmala).</span>
-            <span>• Bottleneck Watch: Water availability requires PHED pipeline augmentation.</span>
+          <div className="text-[11px] text-slate-500 flex items-center gap-4 pt-1">
+            <span>• Alternatives Rejected: Site Beta (assigned to Garhi Mandu); Site Gamma (school desk deficit).</span>
+            <span>• Bottleneck Watch: Delhi Jal Board Bhagirathi WTP feeder line augmentation recommended.</span>
           </div>
         </div>
 
-        {/* Priority 2 Highlight Box: Chooralmala to Site Beta */}
-        <div className="p-4 rounded-lg bg-slate-900/90 border border-orange-900/60 space-y-2">
+        {/* Priority 2 Highlight Box: Garhi Mandu to Site Beta */}
+        <div className="p-4 rounded-lg bg-slate-50 border border-orange-200 space-y-2">
           <div className="flex items-center justify-between font-bold text-xs">
-            <span className="text-orange-400 flex items-center gap-1.5">
-              <ShieldAlert className="w-4 h-4" />
-              DIRECTIVE 2 (URGENT): Relocate Chooralmala (465 HH / 1,860 Pop) ➔ Site Beta (Nedumbala Terraces)
+            <span className="text-orange-800 flex items-center gap-1.5">
+              <ShieldAlert className="w-4 h-4 text-orange-600" />
+              DIRECTIVE 2 (URGENT): Relocate Garhi Mandu (588 HH / 2,940 Pop) ➔ Site Beta (Mandoli Resettlement Sector)
             </span>
-            <span className="text-emerald-400 font-mono">11.8 km / ~32 min transit</span>
+            <span className="text-emerald-800 font-mono">6.2 km / ~22 min transit</span>
           </div>
-          <p className="text-xs text-slate-300 leading-relaxed">
-            <b>Primary Rationale:</b> Severe riverbed lateral widening (45m) and commercial zone obliteration; Site Beta is only 11.8 km away, minimizing livelihood disruption for tea plantation workers while providing 490 HH safe capacity.
+          <p className="text-xs text-slate-700 leading-relaxed">
+            <b>Primary Rationale:</b> Unbunded marshy swale facing direct Hathnikund surge runoff; Site Beta is only 6.2 km away via Wazirabad corridor, minimizing livelihood disruption for workers while providing 780 HH safe capacity.
           </p>
-          <div className="text-[11px] text-slate-400 flex items-center gap-4 pt-1">
+          <div className="text-[11px] text-slate-500 flex items-center gap-4 pt-1">
             <span>• Alternatives Rejected: Site Alpha (insufficient remaining headroom).</span>
-            <span>• Bottleneck Watch: PWD single-lane bridge widening required.</span>
+            <span>• Bottleneck Watch: PWD bridge widening required across rail spur.</span>
           </div>
         </div>
 
         {/* Statutory Legal Disclaimer */}
-        <div className="p-3 rounded-lg bg-amber-950/40 border border-amber-800/60 flex items-start gap-2.5 text-xs text-amber-200">
-          <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+        <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 flex items-start gap-2.5 text-xs text-amber-900">
+          <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
           <p className="leading-relaxed">
-            <b>Statutory Notice:</b> This platform is an automated decision-support system designed for risk modeling, capacity sizing, and spatial optimization. Final resettlement, land acquisition, and de-notification orders require field survey verification, socio-economic impact assessment (SIA), and statutory approval by the Competent Authority under the Disaster Management Act 2005.
+            <b>Statutory Notice:</b> This platform is an automated decision-support system designed for flood risk modeling, carrying-capacity sizing, and spatial allocation. Final resettlement, land allotment, and de-notification orders require field survey verification, socio-economic impact assessment (SIA), and statutory approval by the Competent Authority under the Disaster Management Act 2005.
           </p>
         </div>
       </div>

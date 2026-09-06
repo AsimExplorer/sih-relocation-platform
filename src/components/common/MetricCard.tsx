@@ -18,40 +18,42 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   variant = 'default',
   badgeText,
 }) => {
-  const variantStyles = {
-    danger: 'border-red-800/50 bg-gradient-to-br from-red-950/30 via-slate-900 to-slate-950 text-red-400',
-    warning: 'border-orange-800/50 bg-gradient-to-br from-orange-950/30 via-slate-900 to-slate-950 text-orange-400',
-    success: 'border-emerald-800/50 bg-gradient-to-br from-emerald-950/30 via-slate-900 to-slate-950 text-emerald-400',
-    info: 'border-blue-800/50 bg-gradient-to-br from-blue-950/30 via-slate-900 to-slate-950 text-blue-400',
-    default: 'border-slate-800 bg-slate-900/90 text-slate-400',
+  const iconColors = {
+    danger: 'bg-red-50 text-red-700 border-red-200',
+    warning: 'bg-orange-50 text-orange-700 border-orange-200',
+    success: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    info: 'bg-blue-50 text-blue-700 border-blue-200',
+    default: 'bg-slate-100 text-slate-700 border-slate-200',
   };
 
-  const iconBg = {
-    danger: 'bg-red-950 text-red-400 border border-red-800/50',
-    warning: 'bg-orange-950 text-orange-400 border border-orange-800/50',
-    success: 'bg-emerald-950 text-emerald-400 border border-emerald-800/50',
-    info: 'bg-blue-950 text-blue-400 border border-blue-800/50',
-    default: 'bg-slate-800 text-slate-300 border border-slate-700',
+  const badgeColors = {
+    danger: 'bg-red-100 text-red-800 border-red-200',
+    warning: 'bg-orange-100 text-orange-800 border-orange-200',
+    success: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    info: 'bg-blue-100 text-blue-800 border-blue-200',
+    default: 'bg-slate-100 text-slate-700 border-slate-200',
   };
 
   return (
-    <div className={`p-4 rounded-xl border ${variantStyles[variant]} backdrop-blur-sm shadow-md transition-all hover:border-slate-700`}>
-      <div className="flex items-start justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">{label}</span>
-        <div className={`p-2 rounded-lg ${iconBg[variant]}`}>
-          <Icon className="w-4 h-4" />
+    <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between">
+      <div>
+        <div className="flex items-start justify-between">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">{label}</span>
+          <div className={`p-2 rounded-lg border ${iconColors[variant]}`}>
+            <Icon className="w-4 h-4" />
+          </div>
+        </div>
+        <div className="mt-2 flex items-baseline gap-2">
+          <span className="text-2xl font-black text-slate-900 font-mono tracking-tight">{value}</span>
+          {badgeText && (
+            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${badgeColors[variant]}`}>
+              {badgeText}
+            </span>
+          )}
         </div>
       </div>
-      <div className="mt-2 flex items-baseline gap-2">
-        <span className="text-2xl font-black text-slate-100 font-mono tracking-tight">{value}</span>
-        {badgeText && (
-          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-            {badgeText}
-          </span>
-        )}
-      </div>
       {subValue && (
-        <p className="mt-1 text-xs text-slate-400 leading-relaxed truncate">{subValue}</p>
+        <p className="mt-1.5 text-xs text-slate-600 leading-relaxed truncate">{subValue}</p>
       )}
     </div>
   );

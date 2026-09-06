@@ -15,65 +15,65 @@ export const TOUR_STEPS = [
   {
     step: 1,
     tab: 'overview' as ActiveTab,
-    title: 'Step 1: Open Wayanad District Situation Overview',
-    narrative: 'Orient the authority: 5 vulnerable settlements in the Meppadi corridor, 5,460 people in extreme danger, and an urgent requirement for permanent relocation planning.',
+    title: 'Step 1: Open East Delhi Situation Overview (USAR Hub Context)',
+    narrative: 'Orient the authority: 5 vulnerable floodplain habitations along the Yamuna Khadar (Loha Pul, Garhi Mandu, Shastri Park), 12,240 exposed residents, and planned resettlement adjacent to Surajmal Vihar / USAR.',
     keyTakeaway: 'This platform answers what happens AFTER hazard detection: who moves, where to, and how many can sustainably fit.'
   },
   {
     step: 2,
     tab: 'hazard' as ActiveTab,
-    title: 'Step 2: Inspect Multi-Hazard Risk & Debris Runout',
-    narrative: 'Examine multi-hazard triggers: 34° slope gradients, catastrophic debris flow channels, and 48-hour monsoonal precipitation thresholds.',
-    keyTakeaway: 'Standard systems stop here at hazard overlays. Our platform uses this as an input into statutory unsuitability zoning.'
+    title: 'Step 2: Inspect Multi-Hazard Floodplain Inundation & Silt Scour',
+    narrative: 'Examine multi-hazard triggers: 208.66m all-time record Yamuna water level, unbunded floodplain surge corridors, and Hathnikund discharge (>3.5 lakh cusecs).',
+    keyTakeaway: 'Standard systems stop at flood depth contours. Our platform feeds this into statutory permanent unsuitability zoning.'
   },
   {
     step: 3,
     tab: 'redzone' as ActiveTab,
-    title: 'Step 3: Activate Permanent Unsuitability Red Zone (v2.0)',
-    narrative: 'Not just a temporary hazard buffer: Red Zone is a permanent habitation prohibition under the DM Act 2005 based on irreversible geomorphic failure.',
-    keyTakeaway: 'Notice version reassessment: v1 (14.2 sq.km, Jan 2025) expanded to v2 (23.8 sq.km, Jan 2026) post-disaster.'
+    title: 'Step 3: Activate Statutory Permanent Unsuitability Red Zone (v2.0)',
+    narrative: 'Permanent prohibition under DM Act Section 30(2) & NGT Yamuna Conservation Orders: area declared permanently unsuitable for habitation.',
+    keyTakeaway: 'Notice version reassessment: v1 (18.5 sq.km, Jan 2024) expanded to v2 (31.2 sq.km, Jan 2025) post-July 2023 flood overtopping.'
   },
   {
     step: 4,
     tab: 'settlements' as ActiveTab,
-    title: 'Step 4: Select Vulnerable Settlement (Mundakkai / Chooralmala)',
-    narrative: 'Click on Mundakkai: 1,420 population, 100% Red Zone overlap, 3 catastrophic slide recurrences, and complete arterial bridge islanding.',
-    keyTakeaway: 'Immediate relocation classification with full statutory justification.'
+    title: 'Step 4: Inspect Vulnerable Settlement (Yamuna Khadar East / Garhi Mandu)',
+    narrative: 'Click on Yamuna Khadar East: 3,850 population, 100% Red Zone overlap, 3 catastrophic flood recurrences, and zero protective bunding.',
+    keyTakeaway: 'Immediate relocation priority with formal statutory de-notification justification.'
   },
   {
     step: 5,
     tab: 'candidates' as ActiveTab,
     title: 'Step 5: Review Candidate Relocation Sites (Suitability Scoring)',
-    narrative: 'Evaluate 4 candidate resettlement parcels in safer plateau areas (Kalpetta East, Nedumbala, Pozhuthana, Ambalavayal).',
-    keyTakeaway: 'Suitability scores (78-86/100) evaluate slope, hazard safety, and trunk connectivity.'
+    narrative: 'Evaluate 4 candidate resettlement parcels (Site Alpha - Karkardooma near USAR, Site Beta - Mandoli, Site Gamma - Anand Vihar/Ghazipur, Site Delta - Bakkarwala).',
+    keyTakeaway: 'Suitability scores (79-88/100) evaluate flood safety, road connectivity, and institutional buffers.'
   },
   {
     step: 6,
     tab: 'capacity' as ActiveTab,
     title: 'Step 6: FLAGSHIP — Site Carrying Capacity & Binding Constraints',
-    narrative: 'Inspect Site Alpha: Land allows 580 households, but Safe Absorption Capacity is capped at 340 households! Why? Water Infrastructure is the Binding Constraint.',
+    narrative: 'Inspect Site Alpha (Karkardooma / USAR Hub): Land allows 820 households, but Safe Absorption Capacity is strictly capped at 620 households! Why? Delhi Jal Board (DJB) water pipeline capacity is the Binding Constraint.',
     keyTakeaway: 'Deterministic min-operator: Safe Capacity = min(Land, Water, Road, Health, School). Transparent and non-blackbox.'
   },
   {
     step: 7,
     tab: 'allocation' as ActiveTab,
     title: 'Step 7: Capacity-Constrained Population-to-Site Matching',
-    narrative: 'Demonstrates shared public capacity: Mundakkai takes 340 HH of Site Alpha, locking it. Chooralmala must be routed to Site Beta (465 of 490 HH capacity).',
+    narrative: 'Demonstrates shared public capacity: Yamuna Khadar takes 620 HH of Site Alpha, locking it. Garhi Mandu must be routed to Site Beta (588 of 780 HH capacity).',
     keyTakeaway: 'Sites are shared resources. Allocation accounts for capacity headroom and origin-destination routes.'
   },
   {
     step: 8,
     tab: 'recommendations' as ActiveTab,
-    title: 'Step 8: Government-Grade Explainable Decision Brief',
-    narrative: 'Review formal DDMA decision brief: specific reasons for selection, alternatives rejected, confidence metrics, and statutory sign-off block.',
+    title: 'Step 8: DDMA Government-Grade Decision Brief',
+    narrative: 'Review formal DDMA executive brief: specific reasons for selection, alternatives rejected, confidence metrics (95.4%), and statutory sign-off block.',
     keyTakeaway: 'No vague AI chatbot claims; audit-ready administrative documentation.'
   },
   {
     step: 9,
     tab: 'audit' as ActiveTab,
     title: 'Step 9: Audit Trail, Provenance & Methodology Verification',
-    narrative: 'Inspect the cryptographic audit ledger, Bhuvan / NDEM / JJM data provenance, and published gazette notifications.',
-    keyTakeaway: 'Accountable government decision support from risk to resettlement.'
+    narrative: 'Inspect the cryptographic audit ledger, CWC / DJB / PWD / NGT data provenance, and published gazette notifications.',
+    keyTakeaway: 'Accountable government decision support from flood risk to sustainable resettlement.'
   }
 ];
 
@@ -87,24 +87,24 @@ export const GuidedTour: React.FC<GuidedTourProps> = ({
   const current = TOUR_STEPS[currentStep - 1] || TOUR_STEPS[0];
 
   return (
-    <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 border-b border-blue-500/40 px-4 py-2.5 sticky top-[57px] z-40 shadow-xl">
+    <div className="bg-blue-50 border-b border-blue-200 px-4 py-2.5 sticky top-[57px] z-40 shadow-sm">
       <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-black text-sm shrink-0 shadow-md">
+          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-700 text-white font-black text-sm shrink-0 shadow-sm">
             {current.step}
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-extrabold text-amber-400 uppercase tracking-wider flex items-center gap-1">
-                <Sparkles className="w-3 h-3" />
+              <span className="text-xs font-extrabold text-blue-900 uppercase tracking-wider flex items-center gap-1">
+                <Sparkles className="w-3 h-3 text-amber-600" />
                 Hackathon Presentation Walkthrough (Step {current.step} of {totalSteps})
               </span>
-              <span className="text-[10px] text-blue-300 font-mono bg-blue-900/60 px-1.5 py-0.2 rounded border border-blue-700">
+              <span className="text-[10px] text-blue-800 font-mono bg-blue-100 px-1.5 py-0.5 rounded border border-blue-300 font-semibold">
                 {current.tab.toUpperCase()}
               </span>
             </div>
-            <h2 className="text-sm font-bold text-white tracking-tight">{current.title}</h2>
-            <p className="text-xs text-slate-300 max-w-4xl">{current.narrative}</p>
+            <h2 className="text-sm font-bold text-slate-900 tracking-tight">{current.title}</h2>
+            <p className="text-xs text-slate-600 max-w-4xl">{current.narrative}</p>
           </div>
         </div>
 
@@ -112,20 +112,20 @@ export const GuidedTour: React.FC<GuidedTourProps> = ({
           <button
             onClick={onPrevStep}
             disabled={currentStep === 1}
-            className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 disabled:opacity-40 text-slate-200 text-xs font-semibold flex items-center gap-1 border border-slate-700"
+            className="px-2.5 py-1 rounded bg-white hover:bg-slate-100 disabled:opacity-40 text-slate-700 text-xs font-semibold flex items-center gap-1 border border-slate-300 shadow-sm"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Prev
           </button>
 
-          <span className="text-xs font-mono text-amber-300 px-1">
+          <span className="text-xs font-mono font-bold text-blue-900 px-1">
             {currentStep}/{totalSteps}
           </span>
 
           {currentStep < totalSteps ? (
             <button
               onClick={onNextStep}
-              className="px-3 py-1 rounded bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1 shadow-md shadow-amber-950"
+              className="px-3 py-1 rounded bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs flex items-center gap-1 shadow-sm"
             >
               Next Step
               <ArrowRight className="w-3.5 h-3.5" />
@@ -133,7 +133,7 @@ export const GuidedTour: React.FC<GuidedTourProps> = ({
           ) : (
             <button
               onClick={onExitTour}
-              className="px-3 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1 shadow-md shadow-emerald-950"
+              className="px-3 py-1 rounded bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs flex items-center gap-1 shadow-sm"
             >
               <CheckCircle2 className="w-3.5 h-3.5" />
               Complete Tour
@@ -142,7 +142,7 @@ export const GuidedTour: React.FC<GuidedTourProps> = ({
 
           <button
             onClick={onExitTour}
-            className="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800"
+            className="p-1 rounded text-slate-500 hover:text-slate-800 hover:bg-blue-100"
             title="Exit Presentation Mode"
           >
             <X className="w-4 h-4" />

@@ -16,50 +16,55 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenReportModal,
 }) => {
   return (
-    <header className="bg-gov-darkest border-b border-gov-border px-4 py-2.5 sticky top-0 z-50 shadow-lg">
+    <header className="bg-white border-b border-slate-200 px-4 py-2.5 sticky top-0 z-50 shadow-sm">
       <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+        {/* Authority branding */}
         <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-lg bg-red-950/80 border border-red-700/80 flex items-center justify-center text-red-400 shadow-md">
-            <Shield className="w-6 h-6 text-red-500" />
+          <div className="w-10 h-10 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700 shadow-sm shrink-0">
+            <Shield className="w-6 h-6 text-blue-700" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-red-400">Government of Kerala | KSDMA</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-red-900/60 text-red-300 border border-red-700 font-mono">
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-900">
+                Delhi Disaster Management Authority (DDMA)
+              </span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-300 font-mono font-semibold">
                 SIH 26191
               </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700 font-medium">
-                Prototype / Demonstration Data
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-medium">
+                Prototype Demonstration Data
               </span>
             </div>
-            <h1 className="text-base font-extrabold text-white tracking-tight flex items-center gap-2">
+            <h1 className="text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
               Disaster Relocation Decision-Support Platform
-              <span className="text-xs font-normal text-slate-400 hidden lg:inline">
-                • Permanent Unsuitability & Sustainable Resettlement
+              <span className="text-xs font-normal text-slate-500 hidden lg:inline">
+                • Government of NCT of Delhi (East Delhi & USAR Sector)
               </span>
             </h1>
           </div>
         </div>
 
+        {/* District & Reassessment context */}
         <div className="flex items-center flex-wrap gap-2 text-xs">
-          <div className="bg-gov-surface px-3 py-1 rounded-md border border-gov-border flex items-center gap-1.5 text-slate-300">
-            <MapPin className="w-3.5 h-3.5 text-blue-400" />
-            <span className="font-semibold text-white">Wayanad District</span>
-            <span className="text-[11px] text-slate-400">(Meppadi / Vythiri)</span>
+          <div className="bg-slate-50 px-3 py-1.5 rounded-md border border-slate-200 flex items-center gap-1.5 text-slate-700">
+            <MapPin className="w-3.5 h-3.5 text-blue-600" />
+            <span className="font-bold text-slate-900">East Delhi District</span>
+            <span className="text-[11px] text-slate-500">(Surajmal Vihar / USAR Hub)</span>
           </div>
 
-          <div className="bg-red-950/40 px-3 py-1 rounded-md border border-red-800/40 flex items-center gap-1.5 text-red-200">
-            <AlertTriangle className="w-3.5 h-3.5 text-red-400" />
-            <span className="font-semibold">{currentRedZoneVersion.label.split(' ')[0]} {currentRedZoneVersion.label.split(' ')[1]}</span>
-            <span className="text-[10px] text-slate-400">({currentRedZoneVersion.date})</span>
+          <div className="bg-red-50 px-3 py-1.5 rounded-md border border-red-200 flex items-center gap-1.5 text-red-900">
+            <AlertTriangle className="w-3.5 h-3.5 text-red-600" />
+            <span className="font-bold">{currentRedZoneVersion.label.split(' ')[0]} {currentRedZoneVersion.label.split(' ')[1]}</span>
+            <span className="text-[11px] text-red-700 font-medium">({currentRedZoneVersion.date})</span>
           </div>
 
+          {/* Action CTAs */}
           <button
             onClick={onToggleDemoMode}
-            className={`px-3 py-1.5 rounded-md font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm border ${
+            className={`px-3 py-1.5 rounded-md font-bold text-xs flex items-center gap-1.5 transition-all border shadow-sm ${
               isDemoMode
-                ? 'bg-amber-500 text-slate-950 border-amber-400 hover:bg-amber-400'
-                : 'bg-blue-600/90 text-white border-blue-500 hover:bg-blue-500'
+                ? 'bg-amber-500 text-slate-950 border-amber-600 hover:bg-amber-400'
+                : 'bg-blue-700 text-white border-blue-800 hover:bg-blue-800'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5" />
@@ -68,10 +73,10 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={onOpenReportModal}
-            className="px-3 py-1.5 rounded-md bg-gov-card hover:bg-slate-700 text-slate-200 border border-slate-600 font-semibold text-xs flex items-center gap-1.5 transition-colors"
+            className="px-3 py-1.5 rounded-md bg-slate-50 hover:bg-slate-100 text-slate-800 border border-slate-300 font-semibold text-xs flex items-center gap-1.5 transition-colors"
           >
-            <FileText className="w-3.5 h-3.5 text-emerald-400" />
-            Export Relocation Brief
+            <FileText className="w-3.5 h-3.5 text-blue-700" />
+            Export DDMA Brief
           </button>
         </div>
       </div>

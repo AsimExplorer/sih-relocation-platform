@@ -48,58 +48,58 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
   return (
     <div className="space-y-4">
       {/* Strategic Positioning Header Card */}
-      <div className="p-4 rounded-xl bg-gradient-to-r from-gov-surface via-gov-card to-gov-surface border border-gov-border shadow-md">
+      <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black uppercase tracking-wider text-red-400 flex items-center gap-1">
-                <AlertOctagon className="w-3.5 h-3.5" />
-                Permanent Relocation Decision Engine
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-800 flex items-center gap-1.5">
+                <ShieldAlert className="w-4 h-4 text-blue-700" />
+                Delhi Disaster Management Decision-Support System
               </span>
-              <span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
-                Wayanad Rehabilitation Directive
+              <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200 font-semibold">
+                East Delhi & Yamuna Basin Directive
               </span>
             </div>
-            <h2 className="text-xl font-black text-white tracking-tight mt-1">
-              From Hazard Detection to Sustainable Permanent Resettlement
+            <h2 className="text-xl font-black text-slate-900 tracking-tight mt-1">
+              From Yamuna Flood Inundation to Planned Permanent Resettlement
             </h2>
-            <p className="text-xs text-slate-300 max-w-4xl mt-1 leading-relaxed">
-              Standard disaster dashboards show where hazards happen. This platform establishes statutory unsuitability, determines relocation urgency, calculates sustainable site carrying capacity with binding infrastructure constraints, and executes capacity-constrained population matching.
+            <p className="text-xs text-slate-600 max-w-4xl mt-1 leading-relaxed">
+              Existing flood platforms merely alert during rising water levels. This system establishes statutory unsuitability for active floodplain habitations, determines relocation priority, calculates sustainable site carrying capacity with infrastructure binding constraints, and produces capacity-constrained matching into safe urban parcels (including the Surajmal Vihar / USAR institutional corridor).
             </p>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={() => onNavigate('capacity')}
-              className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-950 transition-colors"
+              className="px-3.5 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition-colors"
             >
               <Compass className="w-3.5 h-3.5" />
-              Explore Carrying Capacity Engine
+              Carrying Capacity Engine
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
         {/* 8-Stage Workflow Bar */}
-        <div className="mt-4 pt-3 border-t border-gov-border/70 overflow-x-auto">
+        <div className="mt-4 pt-3 border-t border-slate-200 overflow-x-auto">
           <div className="flex items-center justify-between min-w-[760px] text-[11px] font-bold">
-            <span className="text-red-400 flex items-center gap-1">1. Multi-Hazard Risk</span>
-            <span className="text-slate-500">➔</span>
-            <span className="text-red-300 flex items-center gap-1">2. Permanent Red Zone</span>
-            <span className="text-slate-500">➔</span>
-            <span className="text-orange-400 flex items-center gap-1">3. Vulnerable Settlements</span>
-            <span className="text-slate-500">➔</span>
-            <span className="text-amber-400 flex items-center gap-1">4. Relocation Priority</span>
-            <span className="text-slate-500">➔</span>
-            <span className="text-emerald-400 flex items-center gap-1">5. Candidate Sites</span>
-            <span className="text-slate-500">➔</span>
-            <span className="text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-600 flex items-center gap-1">
+            <span className="text-blue-900 flex items-center gap-1">1. Flood Hazard Risk</span>
+            <span className="text-slate-400">➔</span>
+            <span className="text-red-700 flex items-center gap-1">2. Statutory Red Zone</span>
+            <span className="text-slate-400">➔</span>
+            <span className="text-orange-700 flex items-center gap-1">3. Floodplain Habitations</span>
+            <span className="text-slate-400">➔</span>
+            <span className="text-amber-700 flex items-center gap-1">4. Relocation Priority</span>
+            <span className="text-slate-400">➔</span>
+            <span className="text-emerald-700 flex items-center gap-1">5. Candidate Sites</span>
+            <span className="text-slate-400">➔</span>
+            <span className="text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-300 flex items-center gap-1">
               6. Carrying Capacity (FLAGSHIP)
             </span>
-            <span className="text-slate-500">➔</span>
-            <span className="text-blue-400 flex items-center gap-1">7. Allocation Matching</span>
-            <span className="text-slate-500">➔</span>
-            <span className="text-purple-400 flex items-center gap-1">8. Decision Brief</span>
+            <span className="text-slate-400">➔</span>
+            <span className="text-blue-700 flex items-center gap-1">7. Allocation Matching</span>
+            <span className="text-slate-400">➔</span>
+            <span className="text-slate-900 flex items-center gap-1">8. DDMA Brief</span>
           </div>
         </div>
       </div>
@@ -107,37 +107,37 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
       {/* KPI Cards Row */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         <MetricCard
-          label="Vulnerable Settlements"
+          label="Vulnerable Habitations"
           value="5"
-          subValue="Chooralmala & Mundakkai Corridor"
+          subValue="Yamuna Khadar & Shastri Park"
           icon={Home}
           variant="danger"
         />
         <MetricCard
           label="Population at Risk"
           value={totalPop.toLocaleString()}
-          subValue={totalHH + ' Total Households'}
+          subValue={totalHH.toLocaleString() + ' Total Households'}
           icon={Users}
           variant="warning"
         />
         <MetricCard
           label="Immediate Priority"
-          value={immediateCount + ' Sites'}
-          subValue="990 Households (3,960 Pop)"
+          value={immediateCount + ' Clusters'}
+          subValue="1,722 Households (8,610 Pop)"
           icon={AlertOctagon}
           variant="danger"
           badgeText="CRITICAL"
         />
         <MetricCard
-          label="Candidate Sites"
+          label="Candidate Parcels"
           value={candidateSites.length}
-          subValue="Kalpetta, Nedumbala, Pozhuthana"
+          subValue="Karkardooma (USAR), Mandoli, Anand Vihar"
           icon={MapPin}
           variant="info"
         />
         <MetricCard
           label="Safe Absorption Cap"
-          value={totalSafeCapacityHH + ' HH'}
+          value={totalSafeCapacityHH.toLocaleString() + ' HH'}
           subValue={(totalSafeCapacityHH * 4).toLocaleString() + ' Population Capacity'}
           icon={CheckCircle2}
           variant="success"
@@ -145,7 +145,7 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
         <MetricCard
           label="Net Capacity Margin"
           value={'+' + netMargin + ' HH'}
-          subValue="109.1% Total Relocation Coverage"
+          subValue="100.1% Relocation Coverage"
           icon={Activity}
           variant="success"
           badgeText="BALANCED"
@@ -155,19 +155,19 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
       {/* Main Grid: GIS Map + Operational Action Center */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Central Map Column */}
-        <div className="lg:col-span-8 bg-gov-dark rounded-xl border border-gov-border p-3 flex flex-col h-[560px]">
+        <div className="lg:col-span-8 bg-white rounded-xl border border-slate-200 p-3.5 flex flex-col h-[560px] shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-200">Interactive GIS Command Map</span>
-              <span className="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded font-mono">
-                Wayanad (11.585° N, 76.140° E)
+              <span className="text-xs font-bold text-slate-900">East Delhi GIS Decision Map</span>
+              <span className="text-[10px] text-slate-600 bg-slate-100 px-2 py-0.5 rounded font-mono border border-slate-200">
+                Surajmal Vihar / USAR (28.6538° N, 77.3015° E)
               </span>
             </div>
             <div className="flex items-center gap-2 text-[11px]">
-              <span className="text-slate-400">Click markers to inspect.</span>
+              <span className="text-slate-500">Public OpenStreetMap basemap (Zero API key)</span>
               <button
                 onClick={() => onNavigate('hazard')}
-                className="text-blue-400 hover:text-blue-300 font-semibold"
+                className="text-blue-700 hover:text-blue-800 font-semibold"
               >
                 Layer Details ➔
               </button>
@@ -191,32 +191,32 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
         {/* Right Side Operational Summary Column */}
         <div className="lg:col-span-4 space-y-3">
           {/* Urgent Action Banner */}
-          <div className="p-3.5 rounded-xl bg-red-950/40 border border-red-800/60 text-xs space-y-2">
-            <div className="flex items-center justify-between font-bold text-red-300">
-              <span className="flex items-center gap-1.5">
-                <ShieldAlert className="w-4 h-4 text-red-400" />
-                Urgent Relocation Actions
+          <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs space-y-2 shadow-sm">
+            <div className="flex items-center justify-between font-bold text-red-900">
+              <span className="flex items-center gap-1.5 text-sm">
+                <AlertOctagon className="w-4 h-4 text-red-700" />
+                Urgent Relocation Directives
               </span>
-              <span className="text-[10px] bg-red-900/60 px-1.5 py-0.5 rounded text-red-200">
-                Pre-Monsoon 2026
+              <span className="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded font-bold border border-red-300">
+                Pre-Monsoon Window
               </span>
             </div>
-            <p className="text-slate-300 leading-relaxed text-[11px]">
-              3 settlements (Mundakkai, Chooralmala, Punchirimattom) have irreversible crown and runout instability. Formal de-notification under DM Act 2005 recommended immediately.
+            <p className="text-slate-700 leading-relaxed text-[11px]">
+              3 floodplain settlements (Yamuna Khadar East, Garhi Mandu, Bela Estate) lie in unbunded riverbed tracts that submerge whenever Hathnikund discharge exceeds 3 lakh cusecs.
             </p>
             <div className="space-y-1.5 pt-1">
               {settlements.filter(s => s.priority === 'Immediate').map(st => (
                 <div 
                   key={st.id} 
                   onClick={() => { onSelectSettlement(st.id); onNavigate('settlements'); }}
-                  className="flex items-center justify-between p-2 rounded-lg bg-slate-900/90 border border-slate-800 hover:border-red-600/50 cursor-pointer transition-colors"
+                  className="flex items-center justify-between p-2.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 cursor-pointer transition-all shadow-xs"
                 >
                   <div>
-                    <div className="font-bold text-white flex items-center gap-1">
+                    <div className="font-bold text-slate-900 text-xs flex items-center gap-1.5">
                       <span>{st.name}</span>
                       <StatusBadge value={st.priority} size="sm" />
                     </div>
-                    <div className="text-[10px] text-slate-400">{st.households} HH • {st.population} pop</div>
+                    <div className="text-[11px] text-slate-500 mt-0.5">{st.households} HH • {st.population.toLocaleString()} pop</div>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                 </div>
@@ -225,28 +225,28 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
           </div>
 
           {/* Flagship Capacity Spotlight */}
-          <div className="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-800/50 text-xs space-y-2">
-            <div className="flex items-center justify-between font-bold text-emerald-300">
-              <span>Site Capacity Spotlight</span>
-              <span className="text-[10px] bg-emerald-900 text-emerald-200 px-1.5 py-0.5 rounded font-mono">
+          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs space-y-2 shadow-sm">
+            <div className="flex items-center justify-between font-bold text-emerald-900">
+              <span className="text-sm">Carrying Capacity Spotlight</span>
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded font-mono font-bold border border-emerald-300">
                 FLAGSHIP
               </span>
             </div>
-            <p className="text-slate-300 text-[11px] leading-relaxed">
-              Carrying capacity is deterministic: <b className="text-white">min(Land, Water, Roads, Health, Schools)</b>.
+            <p className="text-slate-700 text-[11px] leading-relaxed">
+              Carrying capacity is deterministic: <b className="text-slate-900 font-semibold">min(Land, Water, Roads, Health, Schools)</b>.
             </p>
             <div className="space-y-1.5 pt-1">
               {candidateSites.slice(0, 2).map(site => (
                 <div 
                   key={site.id} 
                   onClick={() => { onSelectSite(site.id); onNavigate('capacity'); }}
-                  className="p-2 rounded-lg bg-slate-900/90 border border-slate-800 hover:border-emerald-500/50 cursor-pointer transition-colors"
+                  className="p-2.5 rounded-lg bg-white border border-slate-200 hover:border-emerald-400 cursor-pointer transition-all shadow-xs"
                 >
-                  <div className="flex items-center justify-between font-bold text-white text-[11px]">
+                  <div className="flex items-center justify-between font-bold text-slate-900 text-xs">
                     <span>{site.name.split('—')[0]}</span>
-                    <span className="font-mono text-emerald-400">{site.calculatedCapacity.netSafeAbsorptionCapacityHH} HH Safe</span>
+                    <span className="font-mono text-emerald-700">{site.calculatedCapacity.netSafeAbsorptionCapacityHH} HH Safe</span>
                   </div>
-                  <div className="text-[10px] text-amber-300 mt-0.5">
+                  <div className="text-[11px] text-amber-800 mt-0.5 font-medium">
                     Binding Factor: {site.calculatedCapacity.bindingConstraint}
                   </div>
                 </div>
@@ -255,16 +255,16 @@ export const OverviewModule: React.FC<OverviewModuleProps> = ({
           </div>
 
           {/* Quick Nav Card */}
-          <div className="p-3.5 rounded-xl bg-gov-card border border-gov-border text-xs flex items-center justify-between">
+          <div className="p-3.5 rounded-xl bg-white border border-slate-200 text-xs flex items-center justify-between shadow-sm">
             <div>
-              <span className="font-bold text-white block">Official Decision Report</span>
-              <span className="text-[11px] text-slate-400">DDMA Relocation Briefing</span>
+              <span className="font-bold text-slate-900 block">Official DDMA Decision Brief</span>
+              <span className="text-[11px] text-slate-500">Government of NCT of Delhi</span>
             </div>
             <button
               onClick={() => onNavigate('recommendations')}
-              className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs flex items-center gap-1"
+              className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-semibold text-xs flex items-center gap-1.5"
             >
-              <FileText className="w-3.5 h-3.5 text-blue-400" />
+              <FileText className="w-3.5 h-3.5 text-blue-700" />
               View Brief
             </button>
           </div>

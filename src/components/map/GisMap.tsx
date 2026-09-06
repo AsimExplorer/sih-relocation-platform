@@ -40,24 +40,24 @@ export const GisMap: React.FC<GisMapProps> = ({
     setLayers(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
-  // Initialize Map
+  // Initialize Map with clean OpenStreetMap tiles (ZERO API KEY, ZERO WATERMARKS)
   useEffect(() => {
     if (!mapContainerRef.current || mapInstanceRef.current) return;
 
+    // Center on East Delhi / Surajmal Vihar / USAR area
     const map = L.map(mapContainerRef.current, {
-      center: [11.5850, 76.1400],
+      center: [28.6538, 77.3015],
       zoom: 12,
       minZoom: 10,
-      maxZoom: 16,
+      maxZoom: 17,
       zoomControl: false,
     });
 
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // Dark-themed high-contrast cartography
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap contributors & CartoDB | KSDMA GeoPortal',
-      subdomains: 'abcd',
+    // Official OpenStreetMap standard public tiles - 100% free, reliable, no API key required, zero watermarks!
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Delhi Disaster Management Authority (DDMA)',
       maxZoom: 19,
     }).addTo(map);
 
@@ -79,50 +79,50 @@ export const GisMap: React.FC<GisMapProps> = ({
 
     group.clearLayers();
 
-    // 1. Hazard Runout Zone (Orange/Amber corridor)
+    // 1. Yamuna Flood Inundation Envelope (Blue Translucent Polygon)
     if (layers.hazardZones) {
-      const hazardPolygonCoords: [number, number][] = [
-        [11.5200, 76.1600],
-        [11.5300, 76.1650],
-        [11.5450, 76.1800],
-        [11.5600, 76.2100],
-        [11.5640, 76.2200],
-        [11.5520, 76.2220],
-        [11.5380, 76.2000],
-        [11.5220, 76.1750],
-        [11.5200, 76.1600]
+      const floodCoords: [number, number][] = [
+        [28.6400, 77.2420],
+        [28.6620, 77.2480],
+        [28.6850, 77.2400],
+        [28.7150, 77.2450],
+        [28.7250, 77.2550],
+        [28.7050, 77.2650],
+        [28.6750, 77.2680],
+        [28.6500, 77.2620],
+        [28.6400, 77.2420]
       ];
 
-      L.polygon(hazardPolygonCoords, {
-        color: '#f97316',
+      L.polygon(floodCoords, {
+        color: '#0284c7',
         weight: 2,
-        dashArray: '4, 4',
-        fillColor: '#ea580c',
-        fillOpacity: 0.18,
+        dashArray: '5, 5',
+        fillColor: '#38bdf8',
+        fillOpacity: 0.22,
       }).bindTooltip(
-        '<div class="text-xs font-bold text-orange-400">GSI High Landslide Susceptibility Zone</div><div class="text-[10px] text-slate-300">Slope >28° • Debris velocity >25 m/s</div>',
+        '<div class="p-1"><div class="text-xs font-bold text-blue-900">Yamuna Peak Flood Inundation Envelope</div><div class="text-[11px] text-slate-700">Level: >208.66m (Crossed Danger Mark 205.33m) • Alluvial Silt Scour</div></div>',
         { sticky: true }
       ).addTo(group);
     }
 
-    // 2. Permanent Unsuitability Red Zone
+    // 2. Statutory Permanent Unsuitability Red Zone (NGT Riverbed "O" Zone)
     if (layers.redZone) {
       activeRedZoneVersion.polygonRings.forEach(ring => {
         const redPoly = L.polygon(ring, {
-          color: '#ef4444',
-          weight: 3,
-          fillColor: '#dc2626',
-          fillOpacity: 0.35,
+          color: '#b91c1c',
+          weight: 2.5,
+          fillColor: '#ef4444',
+          fillOpacity: 0.3,
         });
 
         redPoly.bindTooltip(
-          `<div class="p-1">
-            <div class="text-xs font-black text-red-400 flex items-center gap-1">
-              <span>⚠️ PERMANENT UNSUITABILITY RED ZONE</span>
+          `<div class="p-1 font-sans">
+            <div class="text-xs font-bold text-red-700 flex items-center gap-1">
+              <span>⚠️ STATUTORY PERMANENT UNSUITABILITY RED ZONE</span>
             </div>
-            <div class="text-[11px] font-semibold text-white mt-0.5">${activeRedZoneVersion.label}</div>
-            <div class="text-[10px] text-slate-300 mt-1">Area: ${activeRedZoneVersion.totalAreaSqKm} sq.km | Section 30(2) DM Act 2005</div>
-            <div class="text-[10px] text-amber-300 mt-0.5">Habitations inside: Mundakkai, Chooralmala, Punchirimattom</div>
+            <div class="text-xs font-semibold text-slate-900 mt-0.5">${activeRedZoneVersion.label}</div>
+            <div class="text-[11px] text-slate-600 mt-0.5">Area: ${activeRedZoneVersion.totalAreaSqKm} sq.km | Section 30(2) DM Act 2005 / NGT "O" Zone</div>
+            <div class="text-[11px] text-red-800 font-semibold mt-0.5">Habitations inside: Yamuna Khadar East, Garhi Mandu, Bela Estate</div>
           </div>`,
           { sticky: true }
         );
@@ -131,24 +131,24 @@ export const GisMap: React.FC<GisMapProps> = ({
       });
     }
 
-    // 3. Candidate Relocation Sites (Green safe zones)
+    // 3. Candidate Relocation Sites (Emerald Planned Sectors)
     if (layers.candidateSites) {
       candidateSites.forEach(site => {
         const isSelected = selectedSiteId === site.id;
 
         const sitePoly = L.polygon(site.boundaryGeoJson, {
-          color: isSelected ? '#10b981' : '#059669',
+          color: isSelected ? '#15803d' : '#16a34a',
           weight: isSelected ? 3.5 : 2,
-          fillColor: '#10b981',
-          fillOpacity: isSelected ? 0.45 : 0.25,
+          fillColor: '#22c55e',
+          fillOpacity: isSelected ? 0.35 : 0.2,
         });
 
         sitePoly.bindTooltip(
-          `<div class="p-1">
-            <div class="text-xs font-bold text-emerald-400">${site.name}</div>
-            <div class="text-[11px] font-mono text-white mt-0.5">Safe Capacity: <b>${site.calculatedCapacity.netSafeAbsorptionCapacityHH} HH</b> (${site.calculatedCapacity.netSafePopulationCapacity} persons)</div>
-            <div class="text-[10px] text-amber-300 mt-0.5">Limiting Constraint: ${site.calculatedCapacity.bindingConstraint}</div>
-            <div class="text-[10px] text-slate-300">Suitability: ${site.suitabilityScore}/100 | Slope: ${site.meanSlopeDegrees}°</div>
+          `<div class="p-1 font-sans">
+            <div class="text-xs font-bold text-emerald-800">${site.name}</div>
+            <div class="text-xs text-slate-900 mt-0.5">Safe Capacity: <b>${site.calculatedCapacity.netSafeAbsorptionCapacityHH} HH</b> (${site.calculatedCapacity.netSafePopulationCapacity} persons)</div>
+            <div class="text-[11px] text-amber-800 font-semibold mt-0.5">Limiting Constraint: ${site.calculatedCapacity.bindingConstraint}</div>
+            <div class="text-[11px] text-slate-600">Suitability: ${site.suitabilityScore}/100 | Elevation: ${site.elevationMeters}m MSL</div>
           </div>`,
           { sticky: true }
         );
@@ -160,16 +160,16 @@ export const GisMap: React.FC<GisMapProps> = ({
         const siteIcon = L.divIcon({
           className: 'custom-site-marker',
           html: `
-            <div class="flex flex-col items-center cursor-pointer transition-transform hover:scale-110">
-              <div class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border ${isSelected ? 'border-emerald-400 ring-2 ring-emerald-400/50' : 'border-emerald-600'} text-[11px] font-bold shadow-lg flex items-center gap-1 font-mono">
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <div class="flex flex-col items-center cursor-pointer transition-transform hover:scale-105">
+              <div class="px-2 py-0.5 rounded bg-white text-emerald-800 border ${isSelected ? 'border-emerald-600 ring-2 ring-emerald-300' : 'border-emerald-500'} text-[11px] font-bold shadow-md flex items-center gap-1 font-mono">
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
                 <span>${site.calculatedCapacity.netSafeAbsorptionCapacityHH} HH</span>
               </div>
-              <div class="w-1.5 h-1.5 bg-emerald-400 rotate-45 -mt-0.5"></div>
+              <div class="w-1.5 h-1.5 bg-emerald-600 rotate-45 -mt-0.5"></div>
             </div>
           `,
-          iconSize: [80, 28],
-          iconAnchor: [40, 28],
+          iconSize: [85, 28],
+          iconAnchor: [42, 28],
         });
 
         const marker = L.marker([site.lat, site.lng], { icon: siteIcon });
@@ -178,7 +178,7 @@ export const GisMap: React.FC<GisMapProps> = ({
       });
     }
 
-    // 4. Relocation Allocation Lines (Desire Corridors)
+    // 4. Relocation Allocation Corridors (Desire Lines)
     if (layers.allocations) {
       assignments.forEach(assign => {
         const st = settlements.find(s => s.id === assign.settlementId);
@@ -188,18 +188,18 @@ export const GisMap: React.FC<GisMapProps> = ({
         const isRelated = selectedSettlementId === st.id || selectedSiteId === cs.id;
 
         const line = L.polyline([[st.lat, st.lng], [cs.lat, cs.lng]], {
-          color: isRelated ? '#60a5fa' : '#3b82f6',
+          color: isRelated ? '#1d4ed8' : '#3b82f6',
           weight: isRelated ? 4 : 2.5,
-          dashArray: isRelated ? undefined : '6, 6',
-          opacity: isRelated ? 1.0 : 0.75,
+          dashArray: isRelated ? undefined : '5, 5',
+          opacity: isRelated ? 1.0 : 0.7,
         });
 
         line.bindTooltip(
           `<div class="p-1 font-sans">
-            <div class="text-xs font-bold text-blue-400">${st.name} ➔ ${cs.name.split('—')[0]}</div>
-            <div class="text-[11px] text-white mt-0.5">Relocating: <b>${assign.capacityUtilizedHH} HH</b> (${assign.population} persons)</div>
-            <div class="text-[10px] text-slate-300">Distance: ${assign.distanceKm.toFixed(1)} km | Travel: ~${assign.travelTimeMinutes} min</div>
-            <div class="text-[10px] text-emerald-300 mt-0.5">Site Capacity Utilization: ${assign.siteUtilizationPct}%</div>
+            <div class="text-xs font-bold text-blue-900">${st.name} ➔ ${cs.name.split('—')[0]}</div>
+            <div class="text-xs text-slate-800 mt-0.5">Relocating: <b>${assign.capacityUtilizedHH} HH</b> (${assign.population} persons)</div>
+            <div class="text-[11px] text-slate-600">Distance: ${assign.distanceKm.toFixed(1)} km | Travel: ~${assign.travelTimeMinutes} min</div>
+            <div class="text-[11px] text-emerald-800 font-semibold mt-0.5">Site Capacity Utilization: ${assign.siteUtilizationPct}%</div>
           </div>`,
           { sticky: true }
         );
@@ -217,20 +217,20 @@ export const GisMap: React.FC<GisMapProps> = ({
         const stIcon = L.divIcon({
           className: 'custom-settlement-marker',
           html: `
-            <div class="flex flex-col items-center cursor-pointer transition-transform hover:scale-110">
-              <div class="px-2 py-0.5 rounded ${
+            <div class="flex flex-col items-center cursor-pointer transition-transform hover:scale-105">
+              <div class="px-2 py-0.5 rounded bg-white ${
                 isImmediate 
-                  ? 'bg-red-950 text-red-200 border-red-600' 
-                  : 'bg-orange-950 text-orange-200 border-orange-600'
-              } border ${isSelected ? 'ring-2 ring-red-400' : ''} text-[11px] font-black shadow-lg flex items-center gap-1 font-mono">
-                <span class="w-2 h-2 rounded-full ${isImmediate ? 'bg-red-500 animate-ping' : 'bg-orange-500'}"></span>
-                <span>${st.name} (${st.households} HH)</span>
+                  ? 'text-red-700 border-red-500' 
+                  : 'text-orange-700 border-orange-500'
+              } border ${isSelected ? 'ring-2 ring-red-400' : ''} text-[11px] font-bold shadow-md flex items-center gap-1 font-mono">
+                <span class="w-2 h-2 rounded-full ${isImmediate ? 'bg-red-600' : 'bg-orange-500'}"></span>
+                <span>${st.name.split('(')[0].trim()} (${st.households} HH)</span>
               </div>
               <div class="w-2 h-2 ${isImmediate ? 'bg-red-600' : 'bg-orange-600'} rotate-45 -mt-1"></div>
             </div>
           `,
-          iconSize: [120, 28],
-          iconAnchor: [60, 28],
+          iconSize: [140, 28],
+          iconAnchor: [70, 28],
         });
 
         const marker = L.marker([st.lat, st.lng], { icon: stIcon });
@@ -238,11 +238,11 @@ export const GisMap: React.FC<GisMapProps> = ({
 
         marker.bindTooltip(
           `<div class="p-1 font-sans">
-            <div class="text-xs font-black text-red-400">${st.name} (${st.localPanchayat})</div>
-            <div class="text-[11px] font-semibold text-white mt-0.5">Priority: <b class="text-red-300">${st.priority.toUpperCase()}</b> | Risk Score: ${st.riskScore}/100</div>
-            <div class="text-[10px] text-slate-300 mt-1">Exposed Pop: ${st.population} (${st.households} HH)</div>
-            <div class="text-[10px] text-rose-300">Permanent Red Zone Overlap: ${st.redZoneOverlapPct}%</div>
-            <div class="text-[10px] text-slate-400">Historical Disasters: ${st.historicalDisasters.length} Catastrophic Events</div>
+            <div class="text-xs font-bold text-red-800">${st.name}</div>
+            <div class="text-[11px] text-slate-600">${st.localPanchayat}</div>
+            <div class="text-xs text-slate-900 mt-1">Priority: <b class="text-red-700">${st.priority.toUpperCase()}</b> | Risk Score: ${st.riskScore}/100</div>
+            <div class="text-[11px] text-slate-700 mt-0.5">Exposed: ${st.population.toLocaleString()} pop (${st.households} HH)</div>
+            <div class="text-[11px] text-red-700 font-semibold">Red Zone Overlap: ${st.redZoneOverlapPct}%</div>
           </div>`,
           { sticky: true }
         );
@@ -253,7 +253,7 @@ export const GisMap: React.FC<GisMapProps> = ({
 
   }, [settlements, candidateSites, activeRedZoneVersion, assignments, selectedSettlementId, selectedSiteId, layers]);
 
-  // Center on selected settlement or site if changed
+  // Fly to selected point
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map) return;
@@ -261,18 +261,18 @@ export const GisMap: React.FC<GisMapProps> = ({
     if (selectedSettlementId) {
       const st = settlements.find(s => s.id === selectedSettlementId);
       if (st) {
-        map.flyTo([st.lat, st.lng], 13.5, { duration: 1.2 });
+        map.flyTo([st.lat, st.lng], 13.5, { duration: 1.0 });
       }
     } else if (selectedSiteId) {
       const site = candidateSites.find(s => s.id === selectedSiteId);
       if (site) {
-        map.flyTo([site.lat, site.lng], 13.5, { duration: 1.2 });
+        map.flyTo([site.lat, site.lng], 13.5, { duration: 1.0 });
       }
     }
   }, [selectedSettlementId, selectedSiteId, settlements, candidateSites]);
 
   return (
-    <div className="relative w-full h-full min-h-[500px] overflow-hidden rounded-xl border border-slate-700/80 shadow-inner">
+    <div className="relative w-full h-full min-h-[500px] overflow-hidden rounded-xl border border-slate-300 shadow-sm bg-slate-50">
       <div ref={mapContainerRef} className="w-full h-full" />
       <MapLegend layers={layers} onToggleLayer={handleToggleLayer} />
     </div>
